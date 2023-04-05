@@ -2411,7 +2411,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
      *
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): mixed
     {
         return $this->toArray();
     }
@@ -3610,7 +3610,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
      * @param  mixed  $offset
      * @return bool
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->$offset);
     }
@@ -3621,7 +3621,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
      * @param  mixed  $offset
      * @return mixed
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->$offset;
     }
@@ -3633,7 +3633,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
      * @param  mixed  $value
      * @return void
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->$offset = $value;
     }
@@ -3644,7 +3644,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
      * @param  mixed  $offset
      * @return void
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->$offset);
     }
