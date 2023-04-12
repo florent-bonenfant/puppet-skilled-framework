@@ -1,6 +1,6 @@
 {
     "description": "Puppet Skilled framework",
-    "name": "globalis/puppet-skilled-framework",
+    "name": "florent-bonenfant/puppet-skilled-framework",
     "type": "library",
     "homepage": "https://globalis-ms.com",
     "require": {
