@@ -6,11 +6,11 @@ trait Uuid
     /**
      * Insert the given attributes and set the ID on the model.
      *
-     * @param  \Globalis\Database\Magic\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @param  array  $attributes
      * @return void
      */
-    protected function insertAndSetId(Builder $query, $attributes)
+    protected function insertAndSetId(\Illuminate\Database\Eloquent\Builder $query, $attributes)
     {
         $id = $this->generateUuid();
         $attributes[$keyName = $this->getKeyName()] = $id;

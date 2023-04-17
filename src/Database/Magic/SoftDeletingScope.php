@@ -13,11 +13,11 @@ class SoftDeletingScope implements Scope
     /**
      * Apply the scope to a given Eloquent query builder.
      *
-     * @param  \Globalis\PuppetSkilled\Database\Magic\Builder  $builder
+     * @param  \Illuminate\Database\Eloquent\Builder  $builder
      * @param  \Globalis\PuppetSkilled\Database\Magic\Model  $model
      * @return void
      */
-    public function apply(Builder $builder, Model $model)
+    public function apply(\Illuminate\Database\Eloquent\Builder $builder, Model $model)
     {
         $builder->whereNull($model->getQualifiedDeletedAtColumn());
     }
@@ -25,10 +25,10 @@ class SoftDeletingScope implements Scope
     /**
      * Extend the query builder with the needed functions.
      *
-     * @param  \Globalis\PuppetSkilled\Database\Magic\Builder  $builder
+     * @param  \Illuminate\Database\Eloquent\Builder  $builder
      * @return void
      */
-    public function extend(Builder $builder)
+    public function extend(\Illuminate\Database\Eloquent\Builder $builder)
     {
         foreach ($this->extensions as $extension) {
             $this->{"add{$extension}"}($builder);
@@ -46,10 +46,10 @@ class SoftDeletingScope implements Scope
     /**
      * Get the "deleted at" column for the builder.
      *
-     * @param  \Globalis\PuppetSkilled\Database\Magic\Builder  $builder
+     * @param  \Illuminate\Database\Eloquent\Builder  $builder
      * @return string
      */
-    protected function getDeletedAtColumn(Builder $builder)
+    protected function getDeletedAtColumn(\Illuminate\Database\Eloquent\Builder $builder)
     {
         if (count($builder->getQuery()->joins) > 0) {
             return $builder->getModel()->getQualifiedDeletedAtColumn();
@@ -61,10 +61,10 @@ class SoftDeletingScope implements Scope
     /**
      * Add the restore extension to the builder.
      *
-     * @param  \Globalis\PuppetSkilled\Database\Magic\Builder  $builder
+     * @param  \Illuminate\Database\Eloquent\Builder  $builder
      * @return void
      */
-    protected function addRestore(Builder $builder)
+    protected function addRestore(\Illuminate\Database\Eloquent\Builder $builder)
     {
         $builder->macro('restore', function (Builder $builder) {
             $builder->withTrashed();
@@ -76,10 +76,10 @@ class SoftDeletingScope implements Scope
     /**
      * Add the with-trashed extension to the builder.
      *
-     * @param  \Globalis\PuppetSkilled\Database\Magic\Builder  $builder
+     * @param  \Illuminate\Database\Eloquent\Builder  $builder
      * @return void
      */
-    protected function addWithTrashed(Builder $builder)
+    protected function addWithTrashed(\Illuminate\Database\Eloquent\Builder $builder)
     {
         $builder->macro('withTrashed', function (Builder $builder) {
             return $builder->withoutGlobalScope($this);
@@ -89,10 +89,10 @@ class SoftDeletingScope implements Scope
     /**
      * Add the without-trashed extension to the builder.
      *
-     * @param  \Globalis\PuppetSkilled\Database\Magic\Builder  $builder
+     * @param  \Illuminate\Database\Eloquent\Builder  $builder
      * @return void
      */
-    protected function addWithoutTrashed(Builder $builder)
+    protected function addWithoutTrashed(\Illuminate\Database\Eloquent\Builder $builder)
     {
         $builder->macro('withoutTrashed', function (Builder $builder) {
             $model = $builder->getModel();
@@ -108,10 +108,10 @@ class SoftDeletingScope implements Scope
     /**
      * Add the only-trashed extension to the builder.
      *
-     * @param  \Globalis\PuppetSkilled\Database\Magic\Builder  $builder
+     * @param  \Illuminate\Database\Eloquent\Builder  $builder
      * @return void
      */
-    protected function addOnlyTrashed(Builder $builder)
+    protected function addOnlyTrashed(\Illuminate\Database\Eloquent\Builder $builder)
     {
         $builder->macro('onlyTrashed', function (Builder $builder) {
             $model = $builder->getModel();

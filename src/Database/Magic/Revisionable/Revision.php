@@ -162,8 +162,8 @@ class Revision extends Model
     /**
      * Query scope ordered.
      *
-     * @param  \Globalis\PuppetSkilled\Database\Magic\Builder
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder
+     * @param  \Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeOrdered($query)
     {
@@ -173,9 +173,9 @@ class Revision extends Model
     /**
      * Query scope for.
      *
-     * @param \Globalis\PuppetSkilled\Database\Magic\Builder      $query
+     * @param \Illuminate\Database\Eloquent\Builder      $query
      * @param \Globalis\PuppetSkilled\Database\Magic\Model|string $table
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeFor($query, $table)
     {

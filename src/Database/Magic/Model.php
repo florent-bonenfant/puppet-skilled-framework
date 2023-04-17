@@ -537,7 +537,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Begin querying the model.
      *
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public static function query()
     {
@@ -548,7 +548,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
      * Begin querying the model on a given connection.
      *
      * @param  string|null  $connection
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public static function on($connection = null)
     {
@@ -614,7 +614,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
      * Begin querying a model with eager loading.
      *
      * @param  array|string  $relations
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder|static
+     * @return \Illuminate\Database\Eloquent\Builder|static
      */
     public static function with($relations)
     {
@@ -1480,7 +1480,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Perform a model update operation.
      *
-     * @param  \Globalis\PuppetSkilled\Database\Magic\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return bool
      */
     protected function performUpdate(Builder $query)
@@ -1516,7 +1516,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Perform a model insert operation.
      *
-     * @param  \Globalis\PuppetSkilled\Database\Magic\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @return bool
      */
     protected function performInsert(Builder $query)
@@ -1566,7 +1566,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Insert the given attributes and set the ID on the model.
      *
-     * @param  \Globalis\PuppetSkilled\Database\Magic\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
      * @param  array  $attributes
      * @return void
      */
@@ -1674,8 +1674,8 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Set the keys for a save update query.
      *
-     * @param  \Globalis\PuppetSkilled\Database\Magic\Builder  $query
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     protected function setKeysForSaveQuery(Builder $query)
     {
@@ -1801,7 +1801,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Get a new query builder for the model's table.
      *
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function newQuery()
     {
@@ -1818,7 +1818,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
      * Get a new query instance without a given scope.
      *
      * @param  \Globalis\PuppetSkilled\Database\Magic\Scope|string  $scope
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function newQueryWithoutScope($scope)
     {
@@ -1830,7 +1830,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
     /**
      * Get a new query builder that doesn't have any global scopes.
      *
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder|static
+     * @return \Illuminate\Database\Eloquent\Builder|static
      */
     public function newQueryWithoutScopes()
     {
@@ -1848,7 +1848,7 @@ abstract class Model implements ArrayAccess, JsonSerializable
      * Create a new Eloquent query builder for the model.
      *
      * @param  \Globalis\PuppetSkilledDatabase\Query\Builder  $query
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder|static
+     * @return \Illuminate\Database\Eloquent\Builder|static
      */
     public function newBuilder($query)
     {

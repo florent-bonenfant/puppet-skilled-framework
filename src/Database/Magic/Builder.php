@@ -213,7 +213,7 @@ class Builder
      * @param  string|\Closure  $column
      * @param  string  $operator
      * @param  mixed  $value
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder|static
+     * @return \Illuminate\Database\Eloquent\Builder|static
      */
     public function orWhere($column, $operator = null, $value = null)
     {
@@ -228,7 +228,7 @@ class Builder
      * @param  int     $count
      * @param  string  $boolean
      * @param  \Closure|null  $callback
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder|static
+     * @return \Illuminate\Database\Eloquent\Builder|static
      */
     public function has($relation, $operator = '>=', $count = 1, $boolean = 'and', Closure $callback = null)
     {
@@ -266,7 +266,7 @@ class Builder
      * @param  int     $count
      * @param  string  $boolean
      * @param  \Closure|null  $callback
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder|static
+     * @return \Illuminate\Database\Eloquent\Builder|static
      */
     protected function hasNested($relations, $operator = '>=', $count = 1, $boolean = 'and', $callback = null)
     {
@@ -288,7 +288,7 @@ class Builder
      * @param  string  $relation
      * @param  string  $operator
      * @param  int     $count
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder|static
+     * @return \Illuminate\Database\Eloquent\Builder|static
      */
     public function orHas($relation, $operator = '>=', $count = 1)
     {
@@ -301,7 +301,7 @@ class Builder
      * @param  string  $relation
      * @param  string  $boolean
      * @param  \Closure|null  $callback
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder|static
+     * @return \Illuminate\Database\Eloquent\Builder|static
      */
     public function doesntHave($relation, $boolean = 'and', Closure $callback = null)
     {
@@ -315,7 +315,7 @@ class Builder
      * @param  \Closure|null  $callback
      * @param  string  $operator
      * @param  int     $count
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder|static
+     * @return \Illuminate\Database\Eloquent\Builder|static
      */
     public function whereHas($relation, Closure $callback = null, $operator = '>=', $count = 1)
     {
@@ -381,12 +381,12 @@ class Builder
     /**
      * Add the "has" condition where clause to the query.
      *
-     * @param  \Globalis\PuppetSkilled\Database\Magic\Builder  $hasQuery
+     * @param  \Illuminate\Database\Eloquent\Builder  $hasQuery
      * @param  \Globalis\PuppetSkilled\Database\Magic\Relations\Relation  $relation
      * @param  string  $operator
      * @param  int  $count
      * @param  string  $boolean
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder|static
+     * @return \Illuminate\Database\Eloquent\Builder|static
      */
     protected function addHasWhere(Builder $hasQuery, Relation $relation, $operator, $count, $boolean)
     {
@@ -399,8 +399,8 @@ class Builder
     /**
      * Merge the where constraints from another query to the current query.
      *
-     * @param  \Globalis\PuppetSkilled\Database\Magic\Builder  $from
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder|static
+     * @param  \Illuminate\Database\Eloquent\Builder  $from
+     * @return \Illuminate\Database\Eloquent\Builder|static
      */
     public function mergeConstraintsFrom(Builder $from)
     {
@@ -1139,7 +1139,7 @@ class Builder
     /**
      * Apply the scopes to the Eloquent builder instance and return it.
      *
-     * @return \Globalis\PuppetSkilled\Database\Magic\Builder|static
+     * @return \Illuminate\Database\Eloquent\Builder|static
      */
     public function applyScopes()
     {

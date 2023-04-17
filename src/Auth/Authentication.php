@@ -187,7 +187,7 @@ class Authentication extends \Globalis\PuppetSkilled\Service\Base
      * @param  \App\Model\User $user
      * @return string
      */
-    public function registerToken(\Globalis\PuppetSkilled\Database\Magic\Model $user)
+    public function registerToken(\Illuminate\Database\Eloquent\Model $user)
     {
         $this->queryBuilder->from($this->getTokenTable())
             ->insert([

@@ -3,7 +3,7 @@ namespace Globalis\PuppetSkilled\Session;
 
 use Globalis\PuppetSkilled\Core\Application;
 
-class SessionDatabaseDriver extends \CI_Session_driver
+class SessionDatabaseDriver extends  \CI_Session_driver implements \CI_Session_driver_interface
 {
     /**
      * Is session regenerate id

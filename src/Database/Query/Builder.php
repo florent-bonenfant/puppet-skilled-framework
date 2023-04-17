@@ -6,6 +6,7 @@ use CI_DB_driver;
 use RuntimeException;
 use BadMethodCallException;
 use InvalidArgumentException;
+use \Illuminate\Database\Query\Grammars\MySqlGrammar as Grammar;
 
 class Builder
 {

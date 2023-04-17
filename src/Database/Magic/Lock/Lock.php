@@ -3,7 +3,7 @@ namespace Globalis\PuppetSkilled\Database\Magic\Lock;
 
 use Carbon\Carbon;
 
-class Lock extends \Globalis\PuppetSkilled\Database\Magic\Model
+class Lock extends \Illuminate\Database\Eloquent\Model
 {
     /**
      * The table associated with the model.
@@ -50,7 +50,7 @@ class Lock extends \Globalis\PuppetSkilled\Database\Magic\Model
     /**
      * Revision belongs to User (action Executor).
      *
-     * @return \Globalis\PuppetSkilled\Database\Magic\Relations\BelongsTo
+     * @return Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function executor()
     {
@@ -60,7 +60,7 @@ class Lock extends \Globalis\PuppetSkilled\Database\Magic\Model
     /**
      * Lock morphs to models in locked_type.
      *
-     * @return \Globalis\PuppetSkilled\Database\Magic\Relations\MorphTo
+     * @return Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function locked()
     {
