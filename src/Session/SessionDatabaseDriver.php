@@ -1,9 +1,10 @@
 <?php
+
 namespace Globalis\PuppetSkilled\Session;
 
 use Globalis\PuppetSkilled\Core\Application;
 
-class SessionDatabaseDriver extends  \CI_Session_driver implements \CI_Session_driver_interface
+class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_driver_interface
 {
     /**
      * Is session regenerate id
@@ -212,8 +213,8 @@ class SessionDatabaseDriver extends  \CI_Session_driver implements \CI_Session_d
      */
     protected function get_lock($sessionId)
     {
-        $arg = md5($sessionId.($this->_config['match_ip'] ? '_'.$_SERVER['REMOTE_ADDR'] : ''));
-        if ($this->getConnection()->query("SELECT GET_LOCK('".$arg."', 300) AS ci_session_lock")->row()->ci_session_lock) {
+        $arg = md5($sessionId . ($this->_config['match_ip'] ? '_' . $_SERVER['REMOTE_ADDR'] : ''));
+        if ($this->getConnection()->query("SELECT GET_LOCK('" . $arg . "', 300) AS ci_session_lock")->row()->ci_session_lock) {
             $this->_lock = $arg;
             return true;
         }
@@ -233,7 +234,7 @@ class SessionDatabaseDriver extends  \CI_Session_driver implements \CI_Session_d
         if (!$this->_lock) {
             return true;
         }
-        if ($this->getConnection()->query("SELECT RELEASE_LOCK('".$this->_lock."') AS ci_session_lock")->row()->ci_session_lock) {
+        if ($this->getConnection()->query("SELECT RELEASE_LOCK('" . $this->_lock . "') AS ci_session_lock")->row()->ci_session_lock) {
             $this->_lock = false;
             return true;
         }
@@ -248,5 +249,43 @@ class SessionDatabaseDriver extends  \CI_Session_driver implements \CI_Session_d
     protected function getConnection()
     {
         return Application::getInstance()->db;
+    }
+
+    /**
+	 * Validate ID
+	 *
+	 * Checks whether a session ID record exists server-side,
+	 * to enforce session.use_strict_mode.
+	 *
+	 * @param	string	$id	Session ID
+	 * @return	bool
+	 */
+    public function validateId($id)
+    {
+        $query = $this->newQuery()->where('id', $id);
+
+        if (!empty($this->_config['match_ip'])) {
+            $query->where('ip_address', $_SERVER['REMOTE_ADDR']);
+        }
+
+        return !empty($query->first());
+    }
+
+	/**
+	 * Update Timestamp
+	 *
+	 * Update session timestamp without modifying data
+	 *
+	 * @param	string	$id	Session ID
+	 * @param	string	$data	Unknown & unused
+	 * @return	bool
+	 */
+    public function updateTimestamp($id, $data)
+    {
+        $query = $this->newQuery()->where('id', $id);
+        if ($this->_config['match_ip']) {
+            $query->where('ip_address', $_SERVER['REMOTE_ADDR']);
+        }
+        return (bool) $query->update(['timestamp' => time()]);
     }
 }
