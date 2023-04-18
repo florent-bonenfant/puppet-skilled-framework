@@ -190,7 +190,7 @@ class QueryFilter
     /**
      * Apply filter on query
      *
-     * @param  \Globalis\PuppetSkilled\Database\Query\Builder|\Globalis\PuppetSkilled\Database\Magic\Builder $query
+     * @param  \Globalis\PuppetSkilled\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query
      * @return \Globalis\PuppetSkilled\Database\Query\Builder
      */
     public function run($query)

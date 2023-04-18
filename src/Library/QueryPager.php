@@ -122,13 +122,13 @@ class QueryPager
     /**
      * Apply pager on query
      *
-     * @param  \Globalis\PuppetSkilled\Database\Query\Builder|\Globalis\PuppetSkilled\Database\Magic\Builder $query
+     * @param  \Globalis\PuppetSkilled\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query
      * @return array
      */
     public function run($query)
     {
         $options = $this->options;
-        $count = $query->getCountForPagination();
+        $count = (clone $query)->count();
 
         if (!$options['limit']) {
             $options['page'] = 1;
@@ -166,7 +166,7 @@ class QueryPager
             }
         }
         // Add order by unique key
-        if ($query instanceof \Globalis\PuppetSkilled\Database\Magic\Builder) {
+        if ($query instanceof \Illuminate\Database\Eloquent\Builder) {
             $isOrdering = !empty($query->getQuery()->orders);
         } else {
             $isOrdering = !empty($query->orders);

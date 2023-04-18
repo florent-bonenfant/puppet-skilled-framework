@@ -1,7 +1,7 @@
 <?php
 namespace Globalis\PuppetSkilled\Database\Magic\Revisionable;
 
-use Globalis\PuppetSkilled\Database\Magic\Model;
+use Illuminate\Database\Eloquent\Model;
 
 class Revision extends Model
 {

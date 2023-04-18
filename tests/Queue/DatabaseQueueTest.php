@@ -7,7 +7,7 @@ use stdClass;
 
 class DatabaseQueueTest extends \PHPUnit\Framework\TestCase
 {
-    public function tearDown()
+    public function tearDown(): void
     {
         m::close();
     }
@@ -27,12 +27,12 @@ class DatabaseQueueTest extends \PHPUnit\Framework\TestCase
             $this->assertEquals(json_encode(['job' => 'foo', 'data' => ['data']]), $array['payload']);
             $this->assertEquals(0, $array['attempts']);
             $this->assertNull($array['reserved_at']);
-            $this->assertInternalType('int', $array['available_at']);
+            $this->assertIsInt($array['available_at']);
         });
 
         $queue = $this->getMockBuilder('\Globalis\PuppetSkilled\Queue\DatabaseQueue')
             ->setMethods(['getTime', 'getQueryBuilder'])
-            ->setConstructorArgs([m::mock('CI_DB_driver'), 'table', 'default'])
+            ->setConstructorArgs([m::mock('\Illuminate\Database\MySqlConnection'), 'table', 'default'])
             ->getMock();
         $queue->expects($this->any())->method('getQueryBuilder')
             ->will($this->returnValue($query));
@@ -49,14 +49,14 @@ class DatabaseQueueTest extends \PHPUnit\Framework\TestCase
             $this->assertEquals(json_encode(['job' => 'foo', 'data' => ['data']]), $array['payload']);
             $this->assertEquals(0, $array['attempts']);
             $this->assertNull($array['reserved_at']);
-            $this->assertInternalType('int', $array['available_at']);
+            $this->assertIsInt($array['available_at']);
         });
 
         $queue = $this->getMockBuilder('Globalis\PuppetSkilled\Queue\DatabaseQueue')
             ->setMethods(
                 ['getTime', 'getQueryBuilder']
             )
-            ->setConstructorArgs([m::mock('CI_DB_driver'), 'table', 'default'])
+            ->setConstructorArgs([m::mock('\Illuminate\Database\MySqlConnection'), 'table', 'default'])
             ->getMock();
 
         $queue->expects($this->any())->method('getQueryBuilder')
@@ -119,7 +119,7 @@ class DatabaseQueueTest extends \PHPUnit\Framework\TestCase
 
         $queue = $this->getMockBuilder('Globalis\PuppetSkilled\Queue\DatabaseQueue')
             ->setMethods(['getTime', 'getAvailableAt', 'getQueryBuilder'])
-            ->setConstructorArgs([m::mock('CI_DB_driver'), 'table', 'default'])
+            ->setConstructorArgs([m::mock('\Illuminate\Database\MySqlConnection'), 'table', 'default'])
             ->getMock();
 
         $queue->expects($this->any())->method('getQueryBuilder')

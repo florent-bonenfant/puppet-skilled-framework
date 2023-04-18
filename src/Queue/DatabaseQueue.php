@@ -3,16 +3,15 @@ namespace Globalis\PuppetSkilled\Queue;
 
 use DateTime;
 use Carbon\Carbon;
-use CI_DB_driver;
 use Globalis\PuppetSkilled\Queue\Job\Database as DatabaseJob;
-use Globalis\PuppetSkilled\Database\Query\Builder as QueryBuilder;
+use \Illuminate\Database\Query\Builder as QueryBuilder;
 
 class DatabaseQueue extends Queue
 {
     /**
      * The database connection instance.
      *
-     * @var \CI_DB_driver
+     * @var \Illuminate\Database\MySqlConnection
      */
     protected $database;
 
@@ -40,13 +39,13 @@ class DatabaseQueue extends Queue
     /**
      * Create a new database queue instance.
      *
-     * @param  \CI_DB_driver  $database
+     * @param  \Illuminate\Database\MySqlConnection  $database
      * @param  string  $table
      * @param  string  $default
      * @param  int  $expire
      * @return void
      */
-    public function __construct(CI_DB_driver $database, $table, $default = 'default', $expire = 60)
+    public function __construct(\Illuminate\Database\MySqlConnection $database, $table, $default = 'default', $expire = 60)
     {
         $this->table = $table;
         $this->expire = $expire;
@@ -174,13 +173,11 @@ class DatabaseQueue extends Queue
     {
         $queue = $this->getQueue($queue);
 
-        $this->database->trans_begin();
+        $this->database->getPdo()->beginTransaction();
 
         if ($job = $this->getNextAvailableJob($queue)) {
             $job = $this->markJobAsReserved($job);
-
-            $this->database->trans_commit();
-
+            $this->database->getPdo()->commit();
             return new DatabaseJob(
                 $this,
                 $job,
@@ -188,7 +185,7 @@ class DatabaseQueue extends Queue
             );
         }
 
-        $this->database->trans_commit();
+        $this->database->getPdo()->commit();
     }
 
     /**
@@ -271,13 +268,13 @@ class DatabaseQueue extends Queue
      */
     public function deleteReserved($queue, $id)
     {
-        $this->database->trans_begin();
+        $this->database->getPdo()->beginTransaction();
 
         if ($this->getQueryBuilder()->from($this->table)->lockForUpdate()->find($id)) {
             $this->getQueryBuilder()->from($this->table)->where('id', $id)->delete();
         }
 
-        $this->database->trans_commit();
+        $this->database->getPdo()->commit();
     }
 
     /**
@@ -328,7 +325,7 @@ class DatabaseQueue extends Queue
     /**
      * Get the underlying database instance.
      *
-     * @return \CI_DB_driver
+     * @return \Illuminate\Database\MySqlConnection
      */
     public function getDatabase()
     {

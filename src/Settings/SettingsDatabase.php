@@ -1,8 +1,7 @@
 <?php
 namespace Globalis\PuppetSkilled\Settings;
 
-use \Globalis\PuppetSkilled\Database\Query\Builder;
-
+use \Illuminate\Database\Query\Builder;
 class SettingsDatabase
 {
     protected $table;
@@ -55,6 +54,6 @@ class SettingsDatabase
 
     protected function getBuilder()
     {
-        return new Builder($this->connection, $this->connection->getQueryGrammar);
+        return new Builder($this->connection, $this->connection->getQueryGrammar());
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Foo\Bar;
 
-use \Globalis\PuppetSkilled\Database\Magic\Model;
+use \Illuminate\Database\Eloquent\Model;
 
 class MagicModelNamespacedStub extends Model
 {
