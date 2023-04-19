@@ -56,7 +56,7 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
      * @param    string    $name        Session cookie name, unused
      * @return    bool
      */
-    public function open($savePath, $name)
+    public function open($savePath, $name): bool
     {
         return $this->_success;
     }
@@ -69,6 +69,7 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
      * @param    string    $sessionId    Session ID
      * @return    string    Serialized session data
      */
+    #[\ReturnTypeWillChange]
     public function read($sessionId)
     {
         if ($this->get_lock($sessionId) !== false) {
@@ -118,10 +119,11 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
      * @param    string    $session_data    Serialized session data
      * @return    bool
      */
-    public function write($sessionId, $sessionData)
+    #[\ReturnTypeWillChange]
+    public function write($sessionId, $sessionData): bool
     {
         if ($this->_lock === false) {
-            return $this->_fail();
+            return $this->_failure;
         }
 
         $insertData = array(
@@ -146,7 +148,7 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
                 return $this->_success;
             }
         }
-        return $this->_fail();
+        return $this->_failure;
     }
 
     /**
@@ -156,10 +158,10 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
      *
      * @return    bool
      */
-    public function close()
+    public function close(): bool
     {
         return ($this->_lock && !$this->_release_lock())
-            ? $this->_fail()
+            ? $this->_failure
             : $this->_success;
     }
 
@@ -171,13 +173,13 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
      * @param    string    $sessionId    Session ID
      * @return    bool
      */
-    public function destroy($sessionId)
+    public function destroy($sessionId): bool
     {
         if ($this->_lock) {
             $query = $this->newQuery()
                 ->where('id', $sessionId);
             if (!$query->delete()) {
-                return $this->_fail();
+                return $this->_failure;
             }
         }
         if ($this->close() === $this->_success) {
@@ -185,7 +187,7 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
             return $this->_success;
         }
 
-        return $this->_fail();
+        return $this->_failure;
     }
 
     /**
@@ -196,11 +198,12 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
      * @param    int     $maxlifetime    Maximum lifetime of sessions
      * @return    bool
      */
-    public function gc($maxlifetime)
+	#[\ReturnTypeWillChange]
+    public function gc($maxlifetime): mixed
     {
         return ($this->newQuery()->where('timestamp', '<', time() - $maxlifetime)->delete())
             ? $this->_success
-            : $this->_fail();
+            : $this->_failure;
     }
 
     /**
@@ -260,7 +263,7 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
 	 * @param	string	$id	Session ID
 	 * @return	bool
 	 */
-    public function validateId($id)
+    public function validateId($id): bool
     {
         $query = $this->newQuery()->where('id', $id);
 
@@ -280,7 +283,7 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
 	 * @param	string	$data	Unknown & unused
 	 * @return	bool
 	 */
-    public function updateTimestamp($id, $data)
+    public function updateTimestamp($id, $data): bool
     {
         $query = $this->newQuery()->where('id', $id);
         if ($this->_config['match_ip']) {
