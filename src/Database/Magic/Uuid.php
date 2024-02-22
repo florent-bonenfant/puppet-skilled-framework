@@ -1,8 +1,24 @@
 <?php
+
 namespace Globalis\PuppetSkilled\Database\Magic;
+
+use Ramsey\Uuid\Uuid as UuidGenerate;
 
 trait Uuid
 {
+
+    /**
+     * Boot the trait for a model.
+     */
+    protected static function bootUuidTrait()
+    {
+        static::creating(function ($model) {
+            if (!$model->getKey()) {
+                $model->{$model->getKeyName()} = UuidGenerate::uuid4()->toString();
+            }
+        });
+    }
+
     /**
      * Insert the given attributes and set the ID on the model.
      *
@@ -12,8 +28,9 @@ trait Uuid
      */
     protected function insertAndSetId(\Illuminate\Database\Eloquent\Builder $query, $attributes)
     {
-        $id = $this->generateUuid();
+        $id = UuidGenerate::uuid4()->toString();
         $attributes[$keyName = $this->getKeyName()] = $id;
+
         $query->insert($attributes);
         $this->setAttribute($keyName, $id);
     }
@@ -47,5 +64,14 @@ trait Uuid
             mt_rand(0, 0xffff),
             mt_rand(0, 0xffff)
         );
+    }
+
+    public function sync($ids)
+    {
+        if ($this->getKeyName() === 'id') {
+            $this->syncWithPivotValues($ids, [ 'id' => Uuid::uuid4()->toString() ]);
+        } else {
+            $this->sync($ids);
+        }
     }
 }
