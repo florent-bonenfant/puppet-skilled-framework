@@ -4,11 +4,11 @@
     "type": "library",
     "homepage": "https://globalis-ms.com",
     "require": {
-        "php": ">=7.0",
+        "php": ">=8.2",
         "pimple/pimple": "^3.0",
-        "nesbot/carbon": "^2.66",
-        "illuminate/database": "^8.83",
-        "illuminate/events": "^8.83"
+        "nesbot/carbon": "^3.2.3",
+        "illuminate/database": "^11.2.0",
+        "illuminate/events": "^11.2.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.0",
