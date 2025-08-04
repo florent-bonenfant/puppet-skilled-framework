@@ -81,7 +81,7 @@ trait Revisionable
             if (in_array($key, $this->getDates()) && ! is_null($attribute)) {
                 $attribute = $this->asDateTime($attribute);
             }
-            if ($attribute instanceof DateTime) {
+            if ($attribute instanceof \DateTime) {
                 $attribute = $this->fromDateTime($attribute);
             }
             $attributes[$key] = (string) $attribute;
