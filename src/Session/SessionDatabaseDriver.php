@@ -123,32 +123,49 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
     public function write($sessionId, $sessionData): bool
     {
         if ($this->_lock === false) {
-            return $this->_failure;
+            log_message('error', 'Session WRITE aborted: no lock for ' . $sessionId);
+            return false;
         }
 
-        $insertData = array(
-            'id' => $sessionId,
-            'ip_address' => $_SERVER['REMOTE_ADDR'],
-            'timestamp' => time(),
-            'data' => $sessionData
-        );
+        try {
+            $insertData = [
+                'id'         => $sessionId,
+                'ip_address' => $_SERVER['REMOTE_ADDR'],
+                'timestamp'  => time(),
+                'data'       => $sessionData
+            ];
 
-        if (!$this->row_exists) {
-            if ($this->newQuery()->insert($insertData)) {
+            $query = $this->newQuery();
+
+            if (!$this->row_exists || $this->_session_id !== $sessionId) {
+                log_message('debug', 'Session WRITE insert for ' . $sessionId);
+                $result = $query->updateOrInsert(
+                    ['id' => $sessionId],
+                    [
+                        'ip_address' => $_SERVER['REMOTE_ADDR'],
+                        'timestamp' => time(),
+                        'data' => $sessionData
+                    ]
+                );
+            } else {
+                log_message('debug', 'Session WRITE update for ' . $sessionId);
+                $result = $query->where('id', $this->_session_id)->update($insertData);
+            }
+
+            if ($result) {
                 $this->_session_id = $sessionId;
                 $this->row_exists = true;
                 $this->_fingerprint = md5($sessionData);
-                return $this->_success;
+                log_message('debug', 'Session WRITE success for ' . $sessionId);
+                return true;
+            } else {
+                log_message('error', 'Session WRITE failed (insert/update false) for ' . $sessionId);
             }
-        } else {
-            if ($this->newQuery()->where('id', $this->_session_id)->update($insertData)) {
-                $this->_session_id = $sessionId;
-                $this->row_exists = true;
-                $this->_fingerprint = md5($sessionData);
-                return $this->_success;
-            }
+        } catch (\Throwable $e) {
+            log_message('error', 'Session WRITE EXCEPTION for ' . $sessionId . ': ' . $e->getMessage());
         }
-        return $this->_failure;
+
+        return false;
     }
 
     /**
