@@ -52,13 +52,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link	https://codeigniter.com/userguide3/libraries/sessions.html
  */
 interface SessionDriverInterface {
-	// public function __construct($driver);
-	public function open($save_path, $name): bool;
+	public function open(string $save_path, string $name): bool;
 	public function close(): bool;
-	public function read($session_id): mixed;
-	public function write($session_id, $session_data): bool;
-	public function destroy($session_id): bool;
-	public function gc($maxlifetime): mixed;
-	public function updateTimestamp($session_id, $data): bool;
-	public function validateId($session_id): bool;
+	public function read(string $session_id): mixed;
+	public function write(string $session_id, string $session_data): bool;
+	public function destroy(string $session_id): bool;
+	public function gc(int $maxlifetime): mixed;
+	public function updateTimestamp(string $session_id, string $data): bool;
+	public function validateId(string $session_id): bool;
 }

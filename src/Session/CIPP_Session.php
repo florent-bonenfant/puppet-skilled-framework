@@ -34,7 +34,7 @@ class CIPP_Session extends \CI_Session {
 		// PHP 7 compatibility
 		interface_exists('SessionUpdateTimestampHandlerInterface', FALSE) OR require_once(BASEPATH.'libraries/Session/SessionUpdateTimestampHandlerInterface.php');
 
-		require_once(BASEPATH.'libraries/Session/CI_Session_driver_interface.php');
+		require_once('SessionDriverInterface.php');
 		$wrapper = is_php('8.0') ? 'PHP8SessionWrapper' : 'OldSessionWrapper';
 		require_once(BASEPATH.'libraries/Session/'.$wrapper.'.php');
 

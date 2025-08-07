@@ -4,7 +4,7 @@ namespace Globalis\PuppetSkilled\Session;
 
 use Globalis\PuppetSkilled\Core\Application;
 
-class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_driver_interface
+class SessionDatabaseDriver extends \CI_Session_driver
 {
     /**
      * Is session regenerate id
@@ -56,7 +56,7 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
      * @param    string    $name        Session cookie name, unused
      * @return    bool
      */
-    public function open($savePath, $name): bool
+    public function open(string $savePath, string $name): bool
     {
         return $this->_success;
     }
@@ -70,7 +70,7 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
      * @return    string    Serialized session data
      */
     #[\ReturnTypeWillChange]
-    public function read($sessionId)
+    public function read(string $sessionId)
     {
         if ($this->get_lock($sessionId) !== false) {
             // Needed by write() to detect session_regenerate_id() calls
@@ -120,7 +120,7 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
      * @return    bool
      */
     #[\ReturnTypeWillChange]
-    public function write($sessionId, $sessionData): bool
+    public function write(string $sessionId, string $sessionData): bool
     {
         if ($this->_lock === false) {
             log_message('error', 'Session WRITE aborted: no lock for ' . $sessionId);
@@ -190,7 +190,7 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
      * @param    string    $sessionId    Session ID
      * @return    bool
      */
-    public function destroy($sessionId): bool
+    public function destroy(string $sessionId): bool
     {
         if ($this->_lock) {
             $query = $this->newQuery()
@@ -216,7 +216,7 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
      * @return    bool
      */
 	#[\ReturnTypeWillChange]
-    public function gc($maxlifetime): mixed
+    public function gc(int $maxlifetime): mixed
     {
         return ($this->newQuery()->where('timestamp', '<', time() - $maxlifetime)->delete())
             ? $this->_success
@@ -231,7 +231,7 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
      * @param    string    $sessionId    Session ID
      * @return    bool
      */
-    protected function get_lock($sessionId)
+    protected function get_lock(string $sessionId)
     {
         $arg = md5($sessionId . ($this->_config['match_ip'] ? '_' . $_SERVER['REMOTE_ADDR'] : ''));
         if ($this->getConnection()->query("SELECT GET_LOCK('" . $arg . "', 300) AS ci_session_lock")->row()->ci_session_lock) {
@@ -280,7 +280,7 @@ class SessionDatabaseDriver extends \CI_Session_driver implements \CI_Session_dr
 	 * @param	string	$id	Session ID
 	 * @return	bool
 	 */
-    public function validateId($id): bool
+    public function validateId(string $id): bool
     {
         $query = $this->newQuery()->where('id', $id);
 
