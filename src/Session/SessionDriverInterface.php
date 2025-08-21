@@ -54,10 +54,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 interface SessionDriverInterface {
 	public function open(string $save_path, string $name): bool;
 	public function close(): bool;
-	public function read(string $session_id): mixed;
+	public function read(string $session_id): string;
 	public function write(string $session_id, string $session_data): bool;
 	public function destroy(string $session_id): bool;
-	public function gc(int $maxlifetime): mixed;
+	public function gc(int $maxlifetime): int|false;
 	public function updateTimestamp(string $session_id, string $data): bool;
 	public function validateId(string $session_id): bool;
 }

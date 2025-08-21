@@ -3,7 +3,33 @@ Cette version utilise CI 3.1.13 et remplace la version eloquent embarqué par un
 
 @todo
 - Voir pour intégrer et utiliser directement codeigniter sans l'intégrer dans les projets
-- continuer les tests
+- continuer les tests, notamment les sessions qui ont un soucis aléatoire (potentiellement réglé)
+
+
+{"resultCode":"OK","resultContent":[]}
+<div style="border:1px solid #990000;padding-left:20px;margin:0 0 10px 0;">
+
+<h4>A PHP Error was encountered</h4>
+
+<p>Severity: Warning</p>
+<p>Message:  session_write_close(): Failed to write session data using user defined save handler. (session.save_path: /var/lib/php/sessions)</p>
+<p>Filename: Unknown</p>
+<p>Line Number: 0</p>
+
+
+    <p>Backtrace:</p>
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+</div>
+
 
 ## Hooks
 Voici le nouveau boot pour PuppetSkilledBootstrap, à adapter selon vos projets :
@@ -124,9 +150,14 @@ class PuppetSkilledBootstrap
 
 ## Sessions
 Adaptation des sessions avec PHP8, veuillez étendre les classes :
-- Remplacer CI_session par \Globalis\PuppetSkilled\Session\CIPP_Session
-- Remplacer CI_SessionWrapper par \Globalis\PuppetSkilled\Session\CIPP_SessionWrapper
+- Remplacer CI_session par \Globalis\PuppetSkilled\Session\APP_CI_Session
+- Remplacer CI_SessionWrapper par \Globalis\PuppetSkilled\Session\APP_CI_SessionWrapper
 
+### Sans webservices
+Vous pouvez surcharger le CI_Session à travers un fichier APP_Session qui lui reprendra les informations ci-dessus et permettra ainsi l'utilisation d'eloquent
+
+### Avec webservices
+Si vous utilisez des webservices, vous très certainement déjà surcharger le CI_Session de codeigniter, il vous suffit d'adapter un peu votre fichier
 
 ## Utilisation ORM
 On bascule maintenant dans une version plus standard d'Eloquent

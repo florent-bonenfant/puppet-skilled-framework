@@ -32,6 +32,9 @@ class SessionDatabaseDriver extends \CI_Session_driver
      */
     protected $platform;
 
+    private $retryGetLock = 6;
+
+    private $delayBeforeRetry = 150000; // ms
     /**
      * Class constructor
      *
@@ -41,6 +44,8 @@ class SessionDatabaseDriver extends \CI_Session_driver
     public function __construct($params)
     {
         parent::__construct($params);
+        log_message('debug', 'Session: type : ' . ini_get('session.save_handler'));
+
         // Note: BC work-around for the old 'sess_table_name' setting, should be removed in the future.
         if (!isset($this->_config['save_path']) && ($this->_config['save_path'] = config_item('sess_table_name'))) {
             log_message('debug', 'Session: "sess_save_path" is empty; using BC fallback to "sess_table_name".');
@@ -70,42 +75,42 @@ class SessionDatabaseDriver extends \CI_Session_driver
      * @return    string    Serialized session data
      */
     #[\ReturnTypeWillChange]
-    public function read(string $sessionId)
+    public function read(string $sessionId): string
     {
-        if ($this->get_lock($sessionId) !== false) {
-            // Needed by write() to detect session_regenerate_id() calls
-            if (!$this->_session_id) {
-                $this->_session_id = $sessionId;
-            }
-            $query = $this->newQuery()
-                ->select('timestamp', 'data')
-                ->where('id', $sessionId);
+        log_message('debug', 'Session READ ' . $sessionId);
+        $this->connection = $this->getConnection();
 
-            if ($this->_config['match_ip']) {
-                $query->where('ip_address', $_SERVER['REMOTE_ADDR']);
-            }
-
-            if (($result = $query->first()) === null) {
-                // PHP7 will reuse the same SessionHandler object after
-                // ID regeneration, so we need to explicitly set this to
-                // false instead of relying on the default ...
-                if ($this->_session_id === $sessionId) {
-                    $this->row_exists = false;
+        for ($i = 0; $i < $this->retryGetLock; $i++) {
+            if ($this->get_lock($sessionId) !== false) {
+                if (!$this->_session_id) {
+                    $this->_session_id = $sessionId;
                 }
-                $this->_fingerprint = md5('');
-                return '';
-            }
 
-            $this->row_exists = true;
+                $query = $this->newQuery()->select('timestamp', 'data')->where('id', $sessionId);
+                if ($this->_config['match_ip']) {
+                    $query->where('ip_address', $_SERVER['REMOTE_ADDR']);
+                }
 
-            if ($result->timestamp < (time() - $this->_config['expiration'])) {
-                $this->_fingerprint = md5('');
-                return '';
+                if (($result = $query->first()) === null) {
+                    $this->row_exists = false;
+                    $this->_fingerprint = md5('');
+                    return '';
+                }
+
+                $this->row_exists = true;
+
+                if ($result->timestamp < (time() - $this->_config['expiration'])) {
+                    $this->_fingerprint = md5('');
+                    return '';
+                }
+
+                $this->_fingerprint = md5($result->data);
+                return $result->data;
+            } else {
+                usleep($this->delayBeforeRetry);
             }
-            $result = $result->data;
-            $this->_fingerprint = md5($result);
-            return $result;
         }
+
         $this->_fingerprint = md5('');
         return '';
     }
@@ -122,49 +127,93 @@ class SessionDatabaseDriver extends \CI_Session_driver
     #[\ReturnTypeWillChange]
     public function write(string $sessionId, string $sessionData): bool
     {
-        if ($this->_lock === false) {
-            log_message('error', 'Session WRITE aborted: no lock for ' . $sessionId);
-            return false;
+        $fingerprint = md5($sessionData);
+        log_message('debug', 'Session WRITE started ' . $sessionId . ' ' . __FILE__);
+
+        // Gestion du session_write_close
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            log_message('debug', "Session WRITE skipped (session inactive) for $sessionId");
+            return true;
+        }
+
+        // Si aucune donnée ou identique à avant → pas besoin d'écrire
+        if ($sessionData === '' || $fingerprint === $this->_fingerprint) {
+            log_message('debug', 'Session WRITE skipped (unchanged) for ' . $sessionId);
+            return true;
+        }
+
+        // Si pas de lock → on skip pour éviter l'erreur, sauf si c'est une nouvelle session
+        if ($this->_lock === false && $this->_session_id === $sessionId) {
+            log_message('debug', 'Session WRITE skipped (no lock) for ' . $sessionId);
+            return true;
         }
 
         try {
-            $insertData = [
-                'id'         => $sessionId,
-                'ip_address' => $_SERVER['REMOTE_ADDR'],
-                'timestamp'  => time(),
-                'data'       => $sessionData
-            ];
-
-            $query = $this->newQuery();
-
-            if (!$this->row_exists || $this->_session_id !== $sessionId) {
-                log_message('debug', 'Session WRITE insert for ' . $sessionId);
-                $result = $query->updateOrInsert(
-                    ['id' => $sessionId],
-                    [
-                        'ip_address' => $_SERVER['REMOTE_ADDR'],
-                        'timestamp' => time(),
-                        'data' => $sessionData
-                    ]
-                );
-            } else {
-                log_message('debug', 'Session WRITE update for ' . $sessionId);
-                $result = $query->where('id', $this->_session_id)->update($insertData);
+            $i = 0;
+            while (!$this->insertData($sessionId, $sessionData)) {
+                log_message('error', sprintf(
+                    'Session WRITE failed for %s after %d retries (lock=%s, row_exists=%s, last_error=%s)',
+                    $sessionId,
+                    $i,
+                    var_export($this->_lock, true),
+                    var_export($this->row_exists, true),
+                    $this->connection ? implode(' | ', $this->connection->getPdo()->errorInfo()) : 'no PDO error'
+                ));
+                if ($i++ >= $this->retryGetLock) {
+                    log_message('error', 'Session WRITE failed (insert/update false) for ' . $sessionId);
+                    return false;
+                }
+                usleep($this->delayBeforeRetry);
             }
+            $this->_fingerprint = $fingerprint;
+            return true;
 
-            if ($result) {
-                $this->_session_id = $sessionId;
-                $this->row_exists = true;
-                $this->_fingerprint = md5($sessionData);
-                log_message('debug', 'Session WRITE success for ' . $sessionId);
-                return true;
-            } else {
-                log_message('error', 'Session WRITE failed (insert/update false) for ' . $sessionId);
-            }
         } catch (\Throwable $e) {
             log_message('error', 'Session WRITE EXCEPTION for ' . $sessionId . ': ' . $e->getMessage());
         }
 
+        log_message('error', sprintf(
+            'Session WRITE failed for %s FIN DE FONCTION WRITE (lock=%s, row_exists=%s, last_error=%s)',
+            $sessionId,
+            var_export($this->_lock, true),
+            var_export($this->row_exists, true),
+            $this->connection ? implode(' | ', $this->connection->getPdo()->errorInfo()) : 'no PDO error'
+        ));
+        return false;
+    }
+
+    private function insertData($sessionId, $sessionData)
+    {
+        $fingerprint = md5($sessionData);
+        $insertData = [
+            'id' => $sessionId,
+            'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
+            'timestamp' => time(),
+            'data' => $sessionData,
+        ];
+
+        $query = $this->newQuery();
+
+        if (!$this->row_exists || $this->_session_id !== $sessionId) {
+            $result = $query->updateOrInsert(
+                ['id' => $sessionId],
+                [
+                    'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
+                    'timestamp' => time(),
+                    'data' => $sessionData,
+                ]
+            );
+        } else {
+            $result = $query->where('id', $this->_session_id)->update($insertData);
+        }
+
+        if ($result !== false) {
+            $this->_session_id = $sessionId;
+            $this->row_exists = true;
+            $this->_fingerprint = $fingerprint;
+            log_message('debug', 'Session WRITE success for ' . $sessionId);
+            return true;
+        }
         return false;
     }
 
@@ -178,8 +227,8 @@ class SessionDatabaseDriver extends \CI_Session_driver
     public function close(): bool
     {
         return ($this->_lock && !$this->_release_lock())
-            ? $this->_failure
-            : $this->_success;
+        ? $this->_failure
+        : $this->_success;
     }
 
     /**
@@ -203,6 +252,7 @@ class SessionDatabaseDriver extends \CI_Session_driver
             $this->_cookie_destroy();
             return $this->_success;
         }
+        log_message('debug', 'destroy false');
 
         return $this->_failure;
     }
@@ -215,12 +265,12 @@ class SessionDatabaseDriver extends \CI_Session_driver
      * @param    int     $maxlifetime    Maximum lifetime of sessions
      * @return    bool
      */
-	#[\ReturnTypeWillChange]
-    public function gc(int $maxlifetime): mixed
+    #[\ReturnTypeWillChange]
+    public function gc(int $maxlifetime): int | false
     {
         return ($this->newQuery()->where('timestamp', '<', time() - $maxlifetime)->delete())
-            ? $this->_success
-            : $this->_failure;
+        ? $this->_success
+        : $this->_failure;
     }
 
     /**
@@ -234,7 +284,9 @@ class SessionDatabaseDriver extends \CI_Session_driver
     protected function get_lock(string $sessionId)
     {
         $arg = md5($sessionId . ($this->_config['match_ip'] ? '_' . $_SERVER['REMOTE_ADDR'] : ''));
-        if ($this->getConnection()->query("SELECT GET_LOCK('" . $arg . "', 300) AS ci_session_lock")->row()->ci_session_lock) {
+        $conn = $this->connection ?: $this->getConnection();
+
+        if ($conn->query("SELECT GET_LOCK('" . $arg . "', 300) AS ci_session_lock")->row()->ci_session_lock) {
             $this->_lock = $arg;
             return true;
         }
@@ -254,10 +306,13 @@ class SessionDatabaseDriver extends \CI_Session_driver
         if (!$this->_lock) {
             return true;
         }
-        if ($this->getConnection()->query("SELECT RELEASE_LOCK('" . $this->_lock . "') AS ci_session_lock")->row()->ci_session_lock) {
+
+        $conn = $this->connection ?: $this->getConnection();
+        if ($conn->query("SELECT RELEASE_LOCK('" . $this->_lock . "') AS ci_session_lock")->row()->ci_session_lock) {
             $this->_lock = false;
             return true;
         }
+
         return false;
     }
 
@@ -272,14 +327,14 @@ class SessionDatabaseDriver extends \CI_Session_driver
     }
 
     /**
-	 * Validate ID
-	 *
-	 * Checks whether a session ID record exists server-side,
-	 * to enforce session.use_strict_mode.
-	 *
-	 * @param	string	$id	Session ID
-	 * @return	bool
-	 */
+     * Validate ID
+     *
+     * Checks whether a session ID record exists server-side,
+     * to enforce session.use_strict_mode.
+     *
+     * @param    string    $id    Session ID
+     * @return    bool
+     */
     public function validateId(string $id): bool
     {
         $query = $this->newQuery()->where('id', $id);
@@ -291,15 +346,15 @@ class SessionDatabaseDriver extends \CI_Session_driver
         return !empty($query->first());
     }
 
-	/**
-	 * Update Timestamp
-	 *
-	 * Update session timestamp without modifying data
-	 *
-	 * @param	string	$id	Session ID
-	 * @param	string	$data	Unknown & unused
-	 * @return	bool
-	 */
+    /**
+     * Update Timestamp
+     *
+     * Update session timestamp without modifying data
+     *
+     * @param    string    $id    Session ID
+     * @param    string    $data    Unknown & unused
+     * @return    bool
+     */
     public function updateTimestamp($id, $data): bool
     {
         $query = $this->newQuery()->where('id', $id);

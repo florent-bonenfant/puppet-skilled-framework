@@ -15,8 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author		Andrey Andreev
  * @link		https://codeigniter.com/userguide3/libraries/sessions.html
  */
-class CIPP_Session extends \CI_Session {
-
+class APP_CI_Session extends \CI_Session {
 	/**
 	 * CI Load Classes
 	 *
@@ -34,7 +33,7 @@ class CIPP_Session extends \CI_Session {
 		// PHP 7 compatibility
 		interface_exists('SessionUpdateTimestampHandlerInterface', FALSE) OR require_once(BASEPATH.'libraries/Session/SessionUpdateTimestampHandlerInterface.php');
 
-		require_once('SessionDriverInterface.php');
+		require_once('SessionHandlerInterface.php');
 		$wrapper = is_php('8.0') ? 'PHP8SessionWrapper' : 'OldSessionWrapper';
 		require_once(BASEPATH.'libraries/Session/'.$wrapper.'.php');
 
