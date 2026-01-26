@@ -34,7 +34,7 @@ class SessionDatabaseDriver extends \CI_Session_driver
 
     private $retryGetLock = 6;
 
-    private $delayBeforeRetry = 150000; // ms
+    private $delayBeforeRetry = 150000; // µs
     /**
      * Class constructor
      *
@@ -44,12 +44,6 @@ class SessionDatabaseDriver extends \CI_Session_driver
     public function __construct($params)
     {
         parent::__construct($params);
-        log_message('debug', 'Session: type : ' . ini_get('session.save_handler'));
-
-        // Note: BC work-around for the old 'sess_table_name' setting, should be removed in the future.
-        if (!isset($this->_config['save_path']) && ($this->_config['save_path'] = config_item('sess_table_name'))) {
-            log_message('debug', 'Session: "sess_save_path" is empty; using BC fallback to "sess_table_name".');
-        }
     }
 
     /**
@@ -77,7 +71,6 @@ class SessionDatabaseDriver extends \CI_Session_driver
     #[\ReturnTypeWillChange]
     public function read(string $sessionId): string
     {
-        log_message('debug', 'Session READ ' . $sessionId);
         $this->connection = $this->getConnection();
 
         for ($i = 0; $i < $this->retryGetLock; $i++) {
@@ -128,23 +121,19 @@ class SessionDatabaseDriver extends \CI_Session_driver
     public function write(string $sessionId, string $sessionData): bool
     {
         $fingerprint = md5($sessionData);
-        log_message('debug', 'Session WRITE started ' . $sessionId . ' ' . __FILE__);
 
         // Gestion du session_write_close
         if (session_status() !== PHP_SESSION_ACTIVE) {
-            log_message('debug', "Session WRITE skipped (session inactive) for $sessionId");
-            return true;
+            // return true;
         }
 
         // Si aucune donnée ou identique à avant → pas besoin d'écrire
         if ($sessionData === '' || $fingerprint === $this->_fingerprint) {
-            log_message('debug', 'Session WRITE skipped (unchanged) for ' . $sessionId);
             return true;
         }
 
         // Si pas de lock → on skip pour éviter l'erreur, sauf si c'est une nouvelle session
         if ($this->_lock === false && $this->_session_id === $sessionId) {
-            log_message('debug', 'Session WRITE skipped (no lock) for ' . $sessionId);
             return true;
         }
 
@@ -194,26 +183,23 @@ class SessionDatabaseDriver extends \CI_Session_driver
 
         $query = $this->newQuery();
 
-        if (!$this->row_exists || $this->_session_id !== $sessionId) {
-            $result = $query->updateOrInsert(
-                ['id' => $sessionId],
-                [
-                    'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
-                    'timestamp' => time(),
-                    'data' => $sessionData,
-                ]
-            );
-        } else {
-            $result = $query->where('id', $this->_session_id)->update($insertData);
-        }
+        $result = $query->updateOrInsert(
+            ['id' => $sessionId],
+            [
+                'ip_address' => $_SERVER['REMOTE_ADDR'] ?? '',
+                'timestamp' => time(),
+                'data' => $sessionData,
+            ]
+        );
 
         if ($result !== false) {
             $this->_session_id = $sessionId;
             $this->row_exists = true;
             $this->_fingerprint = $fingerprint;
-            log_message('debug', 'Session WRITE success for ' . $sessionId);
             return true;
         }
+
+        log_message('error', 'Session WRITE error for ' . $sessionId);
         return false;
     }
 
@@ -252,7 +238,6 @@ class SessionDatabaseDriver extends \CI_Session_driver
             $this->_cookie_destroy();
             return $this->_success;
         }
-        log_message('debug', 'destroy false');
 
         return $this->_failure;
     }
@@ -266,10 +251,12 @@ class SessionDatabaseDriver extends \CI_Session_driver
      * @return    bool
      */
     #[\ReturnTypeWillChange]
-    public function gc(int $maxlifetime): int | false
+    public function gc(int $maxlifetime): int|false
     {
-        return ($this->newQuery()->where('timestamp', '<', time() - $maxlifetime)->delete())
-        ? $this->_success
+        $toDelete = $this->newQuery()->select('id')->where('timestamp', '<', $maxlifetime)->get()->toArray();
+
+        return ($this->newQuery()->whereIn('id', $toDelete)->delete())
+        ? count($toDelete)
         : $this->_failure;
     }
 
