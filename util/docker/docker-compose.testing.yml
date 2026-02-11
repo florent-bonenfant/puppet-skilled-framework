@@ -1,0 +1,45 @@
+version: '2'
+
+services:
+  testing_mysql:
+    image: mysql/mysql-server
+    container_name: testing_mysql
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=guinot_extranet
+      - MYSQL_USER=guinot
+      - MYSQL_PASSWORD=N2V1d3GLeLTb7P6s
+    volumes:
+      - /home/guinot01/database/testing:/var/lib/mysql
+    command : mysqld --sql_mode=""
+  
+  testing_phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: testing_phpmyadmin
+    ports:
+      - 8002:80
+    links:
+      - testing_mysql:db
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    ports:
+      - 1025:1025
+      - 8003:8025
+
+  testing:
+    image: guinot-extranet
+    container_name: testing
+    ports:
+      - 8000:80
+    volumes:
+      - /home/guinot01/www/extranet/testing:/var/www/html
+      - /home/guinot01/eone/testing:/home/docker/eone
+      - /home/guinot01/log/testing/application:/home/docker/log
+      - /home/guinot01/log/testing/apache:/var/log/apache2
+    links:
+      - testing_mysql
+      - mailhog

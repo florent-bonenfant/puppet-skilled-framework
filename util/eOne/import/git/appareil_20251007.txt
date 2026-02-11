@@ -1,0 +1,1 @@
+Client|Code produit|Libelle|Serie|Date initiale|Date sortie|Contrat|Nom du fichier

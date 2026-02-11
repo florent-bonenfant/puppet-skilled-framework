@@ -1,0 +1,3 @@
+societe|client|type_de_commande|numero_de_commande|code_produit|description_du_produit|quantite_commande|prix|date_de_commande|date
+RG|PY21263||359347|||||20251007|
+RG|PY21263||359349|||||20251007|

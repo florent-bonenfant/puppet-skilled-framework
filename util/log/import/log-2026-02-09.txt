@@ -1,0 +1,69 @@
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 22208_57494_20840750.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : shipping number 20840750 -> the institute does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 23707_57507_35736710.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : shipping number 35736710 -> the institute does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 25033_29451_82137700.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : shipping number 82137700 -> the institute does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 25037_29459_24806320.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : document number 24806320 -> the customer does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 25043_29467_88549260.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : shipping number 88549260 -> the institute does not exists
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : document number 57798790 -> the customer does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 25063_29498_93482530.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : document number 93482530 -> the customer does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 25066_29504_94030880.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : document number 94030880 -> the customer does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 25074_29522_50232940.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : document number 50232940 -> the customer does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 25083_29540_78451030.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : shipping number 78451030 -> the institute does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 25085_29542_95676900.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : document number 95676900 -> the customer does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 25086_29543_09405370.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : document number 09405370 -> the customer does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 25087_29545_80059350.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : document number 80059350 -> the customer does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 25089_29548_27692590.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : document number 27692590 -> the customer does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 24772_28188_52327540.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : document number 52327540 -> the customer does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 24764_28131_49187270.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : document number 49187270 -> the customer does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 24787_28213_09733300.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : document number 09733300 -> the customer does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 24789_28215_09161310.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : document number 09161310 -> the customer does not exists
+2026-02-09 14:30:24 - WARNING - App\Job\ImportShippings : 24791_28217_84919720.pdf not found
+2026-02-09 14:30:24 - ERROR - App\Job\ImportShippings : document number 84919720 -> the customer does not exists
+2026-02-09 14:30:24 - ERROR - App\Job\ImportLinkShippingsInvoices : 20840750 / 11033812 : the shipping does not exists
+2026-02-09 14:30:24 - ERROR - App\Job\ImportLinkShippingsInvoices : 35736710 / 11036156 : the shipping does not exists
+2026-02-09 14:30:24 - ERROR - App\Job\ImportLinkShippingsInvoices : 82137700 / 11036157 : the shipping does not exists
+2026-02-09 14:30:24 - ERROR - App\Job\ImportLinkShippingsInvoices : 24806320 / 11036157 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 88549260 / 11036157 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 57798790 / 11025090 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 93482530 / 11025091 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 94030880 / 11025091 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 50232940 / 11025091 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 78451030 / 11036156 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 95676900 / 11025090 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 09405370 / 11025090 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 80059350 / 11025090 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 27692590 / 11025090 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 52327540 / 11025090 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 49187270 / 11025090 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 09733300 / 11025090 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 09161310 / 11025090 : the shipping does not exists
+2026-02-09 14:30:25 - ERROR - App\Job\ImportLinkShippingsInvoices : 84919720 / 11025090 : the shipping does not exists
+2026-02-09 14:30:25 - INFO - App\Job\ImportDeliveryProducts : f2a02add-b465-4284-a82b-d8e2de802f65 added
+2026-02-09 14:30:25 - INFO - App\Job\ImportDeliveryProducts : 6acb4d63-e34b-410f-8ada-f07998a31049 added
+2026-02-09 14:30:25 - INFO - App\Job\ImportDeliveryProducts : 0b48fd0c-2f99-42ad-909f-14aea3da9584 added
+2026-02-09 14:30:25 - INFO - App\Job\ImportDeliveryProducts : 2dae8e42-c916-4f02-9d77-1ed69639b3ff added
+2026-02-09 14:30:26 - INFO - App\Job\ImportDeliveryProducts : e41e5a12-65e2-4279-a5cd-e54750f9af4b added
+2026-02-09 14:30:26 - INFO - App\Job\ImportDeliveryProducts : 5bb9b5dd-c65b-4908-a3c4-372509e3b941 added
+2026-02-09 14:30:26 - INFO - App\Job\ImportDeliveryProducts : 6b8e976c-dd8d-483d-8025-e417d4a5a36a added
+2026-02-09 14:30:26 - INFO - App\Job\ImportDeliveryProducts : 1a5fb194-5be2-4973-930e-72dda62814a8 added
+2026-02-09 14:30:26 - INFO - App\Job\ImportDeliveryProducts : a893476d-daa8-46c4-846e-25743ce43fdc added
+2026-02-09 14:30:26 - INFO - App\Job\ImportDeliveryProducts : 37124c26-741b-48e2-8be2-6276d3bacd68 added
+2026-02-09 14:30:26 - INFO - App\Job\ImportDeliveryProducts : 70ba398b-2d2d-4fd6-8d5e-63c6dcf6ce26 added
+2026-02-09 14:30:26 - INFO - App\Job\ImportDeliveryProducts : 6fbdb562-c9dd-450f-94e6-6c76893c2f26 added
+2026-02-09 14:30:26 - INFO - App\Job\ImportDeliveryProducts : 15a66b58-1618-4f65-ae54-5489d0ffcf8f added

@@ -1,0 +1,221 @@
+2025-12-02 10:57:03 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 10:57:03 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 10:57:03 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 10:57:03 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 10:57:03 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 10:57:03 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 10:57:03 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 10:57:03 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 10:57:03 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 10:57:03 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 10:57:03 - INFO - App\Job\ImportDeliveryProducts : 4801acc9-4602-4209-b2c9-a1977f42e665 added
+2025-12-02 10:57:03 - INFO - App\Job\ImportDeliveryProducts : a0d62f35-5d09-41a4-b107-d2cff06d2274 added
+2025-12-02 10:57:03 - INFO - App\Job\ImportDeliveryProducts : 6ffef805-70b1-4d9a-8f35-d0b3ef430d45 added
+2025-12-02 10:57:03 - INFO - App\Job\ImportDeliveryProducts : 687dcb4c-5808-4917-991b-75370ff293b5 added
+2025-12-02 10:57:03 - INFO - App\Job\ImportDeliveryProducts : eef4f60c-37b9-40f2-af93-992474e301a8 added
+2025-12-02 10:57:40 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 10:57:40 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 10:57:40 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 10:57:40 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 10:57:40 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 10:57:40 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 10:57:40 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 10:57:40 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 10:57:40 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 10:57:40 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 10:57:40 - INFO - App\Job\ImportDeliveryProducts : 4801acc9-4602-4209-b2c9-a1977f42e665 updated
+2025-12-02 10:57:40 - INFO - App\Job\ImportDeliveryProducts : a0d62f35-5d09-41a4-b107-d2cff06d2274 updated
+2025-12-02 10:57:40 - INFO - App\Job\ImportDeliveryProducts : 6ffef805-70b1-4d9a-8f35-d0b3ef430d45 updated
+2025-12-02 10:57:40 - INFO - App\Job\ImportDeliveryProducts : 687dcb4c-5808-4917-991b-75370ff293b5 updated
+2025-12-02 10:57:40 - INFO - App\Job\ImportDeliveryProducts : eef4f60c-37b9-40f2-af93-992474e301a8 updated
+2025-12-02 10:59:07 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 10:59:07 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 10:59:07 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 10:59:07 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 10:59:07 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 10:59:07 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 10:59:07 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 10:59:07 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 10:59:07 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 10:59:07 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 10:59:07 - INFO - App\Job\ImportDeliveryProducts : 4801acc9-4602-4209-b2c9-a1977f42e665 updated
+2025-12-02 10:59:07 - INFO - App\Job\ImportDeliveryProducts : a0d62f35-5d09-41a4-b107-d2cff06d2274 updated
+2025-12-02 10:59:07 - INFO - App\Job\ImportDeliveryProducts : 6ffef805-70b1-4d9a-8f35-d0b3ef430d45 updated
+2025-12-02 10:59:07 - INFO - App\Job\ImportDeliveryProducts : 687dcb4c-5808-4917-991b-75370ff293b5 updated
+2025-12-02 10:59:07 - INFO - App\Job\ImportDeliveryProducts : eef4f60c-37b9-40f2-af93-992474e301a8 updated
+2025-12-02 11:01:42 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 11:01:42 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 11:01:43 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 11:01:43 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 11:01:43 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 11:01:43 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 11:01:43 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 11:01:43 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 11:01:43 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 11:01:43 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 11:01:43 - INFO - App\Job\ImportDeliveryProducts : 7644daf8-dcad-462e-a134-500b774dca39 added
+2025-12-02 11:01:43 - INFO - App\Job\ImportDeliveryProducts : ab847e6a-6e41-4645-872e-1b3cd3e03beb added
+2025-12-02 11:01:43 - INFO - App\Job\ImportDeliveryProducts : 493891a4-a84f-4936-b9af-09cba6b5fea1 added
+2025-12-02 11:01:43 - INFO - App\Job\ImportDeliveryProducts : d63b23a5-9324-4d9a-96f3-1f27c0d2e155 added
+2025-12-02 11:01:43 - INFO - App\Job\ImportDeliveryProducts : f756b22a-f2b9-4942-a253-7f25a69f11be added
+2025-12-02 11:06:46 - ERROR - App\Job\ImportDeliveries : bons_de_livraisons_entetes_20251007.txt : state missing, please correct the file's header
+2025-12-02 11:06:46 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 11:06:46 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 11:06:46 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 11:06:46 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 11:06:46 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 11:06:46 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 11:06:46 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 11:06:46 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 11:06:46 - INFO - App\Job\ImportDeliveryProducts : 7644daf8-dcad-462e-a134-500b774dca39 updated
+2025-12-02 11:06:46 - INFO - App\Job\ImportDeliveryProducts : ab847e6a-6e41-4645-872e-1b3cd3e03beb updated
+2025-12-02 11:06:46 - INFO - App\Job\ImportDeliveryProducts : 493891a4-a84f-4936-b9af-09cba6b5fea1 updated
+2025-12-02 11:06:46 - INFO - App\Job\ImportDeliveryProducts : d63b23a5-9324-4d9a-96f3-1f27c0d2e155 updated
+2025-12-02 11:06:46 - INFO - App\Job\ImportDeliveryProducts : f756b22a-f2b9-4942-a253-7f25a69f11be updated
+2025-12-02 11:07:10 - ERROR - App\Job\ImportDeliveries : bons_de_livraisons_entetes_20251007.txt : state missing, please correct the file's header
+2025-12-02 11:07:10 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 11:07:10 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 11:07:10 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 11:07:10 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 11:07:10 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 11:07:10 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 11:07:10 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 11:07:10 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 11:07:10 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:07:10 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:07:10 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:07:10 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:07:10 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:23:56 - ERROR - App\Job\ImportDeliveries : bons_de_livraisons_entetes_20251007.txt : state missing, please correct the file's header
+2025-12-02 11:23:56 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 11:23:57 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 11:23:57 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 11:23:57 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 11:23:57 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 11:23:57 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 11:23:57 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 11:23:57 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 11:23:57 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:23:57 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:23:57 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:23:57 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:23:57 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:31:29 - ERROR - App\Job\ImportDeliveries : bons_de_livraisons_entetes_20251007.txt : state missing, please correct the file's header
+2025-12-02 11:31:29 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 11:31:29 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 11:31:29 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 11:31:29 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 11:31:29 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 11:31:29 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 11:31:29 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 11:31:29 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 11:31:29 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:31:29 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:31:29 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:31:29 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:31:29 - ERROR - App\Job\ImportDeliveryProducts : Delivery une multi colis et produits -> the delivery does not exists
+2025-12-02 11:32:06 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 11:32:06 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 11:32:07 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 11:32:07 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 11:32:07 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 11:32:07 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 11:32:07 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 11:32:07 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 11:32:07 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 11:32:07 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 11:32:07 - INFO - App\Job\ImportDeliveryProducts : b78d966b-1c77-4220-bf91-19fbf7357cf7 added
+2025-12-02 11:32:07 - INFO - App\Job\ImportDeliveryProducts : 8d300240-5ad3-4783-bb3f-7d5282390f4e added
+2025-12-02 11:32:07 - INFO - App\Job\ImportDeliveryProducts : f65e2bb0-940a-4479-89c2-4eb1081461f1 added
+2025-12-02 11:32:07 - INFO - App\Job\ImportDeliveryProducts : 21291fb3-8b97-4b98-bb2c-fee08a6396ef added
+2025-12-02 11:32:07 - INFO - App\Job\ImportDeliveryProducts : 8ee539e5-c330-4593-9f4b-ae7bd2d9cbc9 added
+2025-12-02 11:46:24 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 11:46:24 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 11:46:25 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 11:46:25 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 11:46:25 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 11:46:25 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 11:46:25 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 11:46:25 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 11:46:25 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 11:46:25 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 11:46:25 - INFO - App\Job\ImportDeliveryProducts : b78d966b-1c77-4220-bf91-19fbf7357cf7 updated
+2025-12-02 11:46:25 - INFO - App\Job\ImportDeliveryProducts : 8d300240-5ad3-4783-bb3f-7d5282390f4e updated
+2025-12-02 11:46:25 - INFO - App\Job\ImportDeliveryProducts : f65e2bb0-940a-4479-89c2-4eb1081461f1 updated
+2025-12-02 11:46:25 - INFO - App\Job\ImportDeliveryProducts : 21291fb3-8b97-4b98-bb2c-fee08a6396ef updated
+2025-12-02 11:46:25 - INFO - App\Job\ImportDeliveryProducts : 8ee539e5-c330-4593-9f4b-ae7bd2d9cbc9 updated
+2025-12-02 11:47:29 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 11:47:29 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 11:47:29 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 11:47:29 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 11:47:29 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 11:47:29 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 11:47:29 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 11:47:29 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 11:47:29 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 11:47:29 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 11:47:29 - INFO - App\Job\ImportDeliveryProducts : b78d966b-1c77-4220-bf91-19fbf7357cf7 updated
+2025-12-02 11:47:29 - INFO - App\Job\ImportDeliveryProducts : 8d300240-5ad3-4783-bb3f-7d5282390f4e updated
+2025-12-02 11:47:29 - INFO - App\Job\ImportDeliveryProducts : f65e2bb0-940a-4479-89c2-4eb1081461f1 updated
+2025-12-02 11:47:29 - INFO - App\Job\ImportDeliveryProducts : 21291fb3-8b97-4b98-bb2c-fee08a6396ef updated
+2025-12-02 11:47:29 - INFO - App\Job\ImportDeliveryProducts : 8ee539e5-c330-4593-9f4b-ae7bd2d9cbc9 updated
+2025-12-02 11:48:32 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 11:48:32 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 11:48:32 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 11:48:32 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 11:48:32 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 11:48:32 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 11:48:32 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 11:48:32 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 11:48:32 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 11:48:32 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 11:48:32 - INFO - App\Job\ImportDeliveryProducts : b78d966b-1c77-4220-bf91-19fbf7357cf7 updated
+2025-12-02 11:48:32 - INFO - App\Job\ImportDeliveryProducts : 8d300240-5ad3-4783-bb3f-7d5282390f4e updated
+2025-12-02 11:48:32 - INFO - App\Job\ImportDeliveryProducts : f65e2bb0-940a-4479-89c2-4eb1081461f1 updated
+2025-12-02 11:48:32 - INFO - App\Job\ImportDeliveryProducts : 21291fb3-8b97-4b98-bb2c-fee08a6396ef updated
+2025-12-02 11:48:32 - INFO - App\Job\ImportDeliveryProducts : 8ee539e5-c330-4593-9f4b-ae7bd2d9cbc9 updated
+2025-12-02 15:40:11 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 15:40:11 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 15:40:12 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 15:40:12 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 15:40:12 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 15:40:12 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 15:40:12 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 15:40:12 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 15:40:12 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 15:40:12 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 15:40:12 - INFO - App\Job\ImportDeliveryProducts : b78d966b-1c77-4220-bf91-19fbf7357cf7 updated
+2025-12-02 15:40:12 - INFO - App\Job\ImportDeliveryProducts : 8d300240-5ad3-4783-bb3f-7d5282390f4e updated
+2025-12-02 15:40:12 - INFO - App\Job\ImportDeliveryProducts : f65e2bb0-940a-4479-89c2-4eb1081461f1 updated
+2025-12-02 15:40:12 - INFO - App\Job\ImportDeliveryProducts : 21291fb3-8b97-4b98-bb2c-fee08a6396ef updated
+2025-12-02 15:40:12 - INFO - App\Job\ImportDeliveryProducts : 8ee539e5-c330-4593-9f4b-ae7bd2d9cbc9 updated
+2025-12-02 15:48:42 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 15:48:42 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 15:48:43 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 15:48:43 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 15:48:43 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 15:48:43 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 15:48:43 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 15:48:43 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 15:48:43 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 15:48:43 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 15:48:43 - INFO - App\Job\ImportDeliveryProducts : b78d966b-1c77-4220-bf91-19fbf7357cf7 updated
+2025-12-02 15:48:43 - INFO - App\Job\ImportDeliveryProducts : 8d300240-5ad3-4783-bb3f-7d5282390f4e updated
+2025-12-02 15:48:43 - INFO - App\Job\ImportDeliveryProducts : f65e2bb0-940a-4479-89c2-4eb1081461f1 updated
+2025-12-02 15:48:43 - INFO - App\Job\ImportDeliveryProducts : 21291fb3-8b97-4b98-bb2c-fee08a6396ef updated
+2025-12-02 15:48:43 - INFO - App\Job\ImportDeliveryProducts : 8ee539e5-c330-4593-9f4b-ae7bd2d9cbc9 updated
+2025-12-02 17:27:27 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 17:27:27 - ERROR - App\Job\ImportDeliveries : institute 20338 -> the institute does not exists
+2025-12-02 17:27:28 - INFO - App\Job\ImportDeliveryProducts : f98d66b7-3f62-472b-95b3-7295c528fcd3 updated
+2025-12-02 17:27:28 - INFO - App\Job\ImportDeliveryProducts : a66c009e-1415-40b7-a805-896de03dba47 updated
+2025-12-02 17:27:28 - INFO - App\Job\ImportDeliveryProducts : 3d66d080-f6a9-48dc-b575-8bb10eb8b2e8 updated
+2025-12-02 17:27:28 - INFO - App\Job\ImportDeliveryProducts : 18cfe6ab-febb-4a73-a359-d4cee5ff54b7 updated
+2025-12-02 17:27:28 - INFO - App\Job\ImportDeliveryProducts : 82c3c413-bed8-49b4-85f2-cc17128f7bcd updated
+2025-12-02 17:27:28 - INFO - App\Job\ImportDeliveryProducts : 9c5d5ee6-3f58-41f0-bd23-1bc64fadc1ac updated
+2025-12-02 17:27:28 - INFO - App\Job\ImportDeliveryProducts : 9a5fd157-0318-4a79-bf27-e5131ac5adb8 updated
+2025-12-02 17:27:28 - INFO - App\Job\ImportDeliveryProducts : cceb6173-75ab-495c-b867-2d5a66d75d11 updated
+2025-12-02 17:27:28 - INFO - App\Job\ImportDeliveryProducts : b78d966b-1c77-4220-bf91-19fbf7357cf7 updated
+2025-12-02 17:27:28 - INFO - App\Job\ImportDeliveryProducts : 8d300240-5ad3-4783-bb3f-7d5282390f4e updated
+2025-12-02 17:27:28 - INFO - App\Job\ImportDeliveryProducts : f65e2bb0-940a-4479-89c2-4eb1081461f1 updated
+2025-12-02 17:27:28 - INFO - App\Job\ImportDeliveryProducts : 21291fb3-8b97-4b98-bb2c-fee08a6396ef updated
+2025-12-02 17:27:28 - INFO - App\Job\ImportDeliveryProducts : 8ee539e5-c330-4593-9f4b-ae7bd2d9cbc9 updated

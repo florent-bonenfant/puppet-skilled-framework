@@ -1,0 +1,8 @@
+{
+  "name": "globbox",
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.6",
+    "flatpickr": "flatpickr-calendar#^2.6.3",
+    "material-iconfont": "https://github.com/globalis-ms/material-iconfont.git"
+  }
+}

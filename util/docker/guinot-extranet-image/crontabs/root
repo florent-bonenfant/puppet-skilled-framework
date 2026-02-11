@@ -1,0 +1,1 @@
+0 23 * * * php /var/www/html/back/public/index.php sync && php /var/www/html/back/public/index.php queue >> /home/docker/log/import.log 2>&1 

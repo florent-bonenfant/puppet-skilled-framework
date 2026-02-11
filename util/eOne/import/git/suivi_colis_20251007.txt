@@ -1,0 +1,1 @@
+societe|client_fac|client_liv|code_suivi|num_cde|transporteur|date

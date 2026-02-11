@@ -1,0 +1,1735 @@
+{
+	"info": {
+		"_postman_id": "0ec0453f-8fc7-4090-9239-84061b593325",
+		"name": "Guinot - Extranet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (responseCode.code === 200) {",
+									"   var jsonData = JSON.parse(responseBody);",
+									"   //postman.setEnvironmentVariable(\"api_key\", jsonData.resultContent.sessionId);",
+									"   postman.setEnvironmentVariable(\"api_key\", jsonData.resultContent.admin_token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "-",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "-",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}authentication/login",
+							"host": [
+								"{{api_url}}authentication"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrow Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (responseCode.code === 200) {",
+									"   var jsonData = JSON.parse(responseBody);",
+									"   postman.setEnvironmentVariable(\"api_key\", jsonData.resultContent.sessionId);",
+									"   //postman.setEnvironmentVariable(\"api_key\", jsonData.resultContent.admin_token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "-",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "-",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}authentication/borrow_customer?customer_id=PY20333&admin_token={{api_key}}",
+							"host": [
+								"{{api_url}}authentication"
+							],
+							"path": [
+								"borrow_customer"
+							],
+							"query": [
+								{
+									"key": "customer_id",
+									"value": "PY20333"
+								},
+								{
+									"key": "admin_token",
+									"value": "{{api_key}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Use",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "customer_id",
+									"value": "25037",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}authentication/use",
+							"host": [
+								"{{api_url}}authentication"
+							],
+							"path": [
+								"use"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "rdhr3qf7s7a35au0k9827ktuhr3ca2q3"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "wendytalano@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}authentication/reset_password",
+							"host": [
+								"{{api_url}}authentication"
+							],
+							"path": [
+								"reset_password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check reset token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "rdhr3qf7s7a35au0k9827ktuhr3ca2q3"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "password_reset_token",
+									"value": "test",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}authentication/check_reset_token",
+							"host": [
+								"{{api_url}}authentication"
+							],
+							"path": [
+								"check_reset_token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set new password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "rdhr3qf7s7a35au0k9827ktuhr3ca2q3"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "-",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "-",
+									"type": "text"
+								},
+								{
+									"key": "password_reset_token",
+									"value": "-",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}authentication/set_new_password",
+							"host": [
+								"{{api_url}}authentication"
+							],
+							"path": [
+								"set_new_password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "password",
+									"value": "-",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}authentication/update_profile",
+							"host": [
+								"{{api_url}}authentication"
+							],
+							"path": [
+								"update_profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change EUA acceptance",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "customer_id",
+									"value": "25037",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}authentication/change_eua_acceptance",
+							"host": [
+								"{{api_url}}authentication"
+							],
+							"path": [
+								"change_eua_acceptance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change parameters",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "allow_email",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "allow_notification",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "passwordConfirm",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}authentication/update_parameters",
+							"host": [
+								"{{api_url}}authentication"
+							],
+							"path": [
+								"update_parameters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Email informations",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "code",
+									"value": "PY20333",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}authentication/email_information",
+							"host": [
+								"{{api_url}}authentication"
+							],
+							"path": [
+								"email_information"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Invoice",
+			"item": [
+				{
+					"name": "Invoice download one",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}invoice/1477535f-1e55-4ff6-b7fc-94b47550beee/file",
+							"host": [
+								"{{api_url}}invoice"
+							],
+							"path": [
+								"1477535f-1e55-4ff6-b7fc-94b47550beee",
+								"file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invoice all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}invoice",
+							"host": [
+								"{{api_url}}invoice"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invoice one",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}invoice/1477535f-1e55-4ff6-b7fc-94b47550beee",
+							"host": [
+								"{{api_url}}invoice"
+							],
+							"path": [
+								"1477535f-1e55-4ff6-b7fc-94b47550beee"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "DelegateUser",
+					"item": [
+						{
+							"name": "Add",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "AUTHORIZATION",
+										"value": "{{api_key}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "last_name",
+											"value": "Dupont",
+											"type": "text"
+										},
+										{
+											"key": "first_name",
+											"value": "martin",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "martin.dupont@globalis-ms.com",
+											"type": "text"
+										},
+										{
+											"key": "permissions[0]",
+											"value": "webservice.ma_permission",
+											"type": "text"
+										},
+										{
+											"key": "permissions[1]",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_url}}delegate_user",
+									"host": [
+										"{{api_url}}delegate_user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "AUTHORIZATION",
+										"value": "{{api_key}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "last_name",
+											"value": "Dupont",
+											"type": "text"
+										},
+										{
+											"key": "first_name",
+											"value": "martini",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "martin.dupont@globalis-ms.com",
+											"type": "text"
+										},
+										{
+											"key": "permissions[]",
+											"value": "webservice.ma_permission",
+											"type": "text"
+										},
+										{
+											"key": "permissions[1]",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_url}}delegate_user/:user_id",
+									"host": [
+										"{{api_url}}delegate_user"
+									],
+									"path": [
+										":user_id"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": "0fcabfb4-a0aa-4ce9-a6f1-55190e6934e5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "AUTHORIZATION",
+										"value": "{{api_key}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "last_name",
+											"value": "Dupont",
+											"type": "text"
+										},
+										{
+											"key": "first_name",
+											"value": "martini",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "martin.dupont@globalis-ms.com",
+											"type": "text"
+										},
+										{
+											"key": "permissions[]",
+											"value": "webservice.ma_permission",
+											"type": "text"
+										},
+										{
+											"key": "permissions[1]",
+											"value": "",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_url}}delegate_user/:user_id",
+									"host": [
+										"{{api_url}}delegate_user"
+									],
+									"path": [
+										":user_id"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": "f8af34df-0714-45de-8847-ab27180fd932"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get one",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AUTHORIZATION",
+										"value": "{{api_key}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{api_url}}delegate_user/:user_id",
+									"host": [
+										"{{api_url}}delegate_user"
+									],
+									"path": [
+										":user_id"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AUTHORIZATION",
+										"value": "{{api_key}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{api_url}}delegate_user",
+									"host": [
+										"{{api_url}}delegate_user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Permissions",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AUTHORIZATION",
+										"value": "{{api_key}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{api_url}}module",
+									"host": [
+										"{{api_url}}module"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Institut",
+					"item": [
+						{
+							"name": "Photo",
+							"item": [
+								{
+									"name": "Delete photo",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "AUTHORIZATION",
+												"value": "{{api_key}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{api_url}}institut/:insitut_id/file/:picture_id",
+											"host": [
+												"{{api_url}}institut"
+											],
+											"path": [
+												":insitut_id",
+												"file",
+												":picture_id"
+											],
+											"variable": [
+												{
+													"key": "insitut_id",
+													"value": "PY20005"
+												},
+												{
+													"key": "picture_id",
+													"value": null
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Add photo",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "AUTHORIZATION",
+												"value": "{{api_key}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "file",
+													"type": "file",
+													"src": "/home/florent/Images/Capture d’écran_2021-11-30_16-32-20.png"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{api_url}}institut/:insitut_id/file",
+											"host": [
+												"{{api_url}}institut"
+											],
+											"path": [
+												":insitut_id",
+												"file"
+											],
+											"variable": [
+												{
+													"key": "insitut_id",
+													"value": "PY20005"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Get",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AUTHORIZATION",
+										"value": "{{api_key}}"
+									}
+								],
+								"url": {
+									"raw": "{{api_url}}institut",
+									"host": [
+										"{{api_url}}institut"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get one",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "AUTHORIZATION",
+										"value": "{{api_key}}"
+									}
+								],
+								"url": {
+									"raw": "{{api_url}}institut/:insitut_id",
+									"host": [
+										"{{api_url}}institut"
+									],
+									"path": [
+										":insitut_id"
+									],
+									"variable": [
+										{
+											"key": "insitut_id",
+											"value": "PY20005"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Edit",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "AUTHORIZATION",
+										"value": "{{api_key}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "1_morning_start",
+											"value": "09:00:00",
+											"description": "Lundi",
+											"type": "text"
+										},
+										{
+											"key": "1_morning_end",
+											"value": "12:00:00",
+											"type": "text"
+										},
+										{
+											"key": "1_afternoon_start",
+											"value": "14:00:00",
+											"type": "text"
+										},
+										{
+											"key": "1_afternoon_end",
+											"value": "18:00:00",
+											"type": "text"
+										},
+										{
+											"key": "2_morning_start",
+											"value": "09:00:00",
+											"description": "Mardi",
+											"type": "text"
+										},
+										{
+											"key": "2_morning_end",
+											"value": "12:00:00",
+											"type": "text"
+										},
+										{
+											"key": "2_afternoon_start",
+											"value": "14:00:00",
+											"type": "text"
+										},
+										{
+											"key": "2_afternoon_end",
+											"value": "18:00:00",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{api_url}}institut/:insitut_id",
+									"host": [
+										"{{api_url}}institut"
+									],
+									"path": [
+										":insitut_id"
+									],
+									"variable": [
+										{
+											"key": "insitut_id",
+											"value": "PY20005"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Furniture",
+			"item": [
+				{
+					"name": "Furniture all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}furniture",
+							"host": [
+								"{{api_url}}furniture"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}furniture/:furniture_id/file",
+							"host": [
+								"{{api_url}}furniture"
+							],
+							"path": [
+								":furniture_id",
+								"file"
+							],
+							"variable": [
+								{
+									"key": "furniture_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contract",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}contract",
+							"host": [
+								"{{api_url}}contract"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}contract/:contract_id/file",
+							"host": [
+								"{{api_url}}contract"
+							],
+							"path": [
+								":contract_id",
+								"file"
+							],
+							"variable": [
+								{
+									"key": "contract_id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CGV",
+			"item": [
+				{
+					"name": "Download",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}cgv/:cgv_id/file",
+							"host": [
+								"{{api_url}}cgv"
+							],
+							"path": [
+								":cgv_id",
+								"file"
+							],
+							"variable": [
+								{
+									"key": "cgv_id",
+									"value": "3bfe5c69-6d2d-46bc-a435-b690bb434326"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}cgv",
+							"host": [
+								"{{api_url}}cgv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}cgv/:cgv_id",
+							"host": [
+								"{{api_url}}cgv"
+							],
+							"path": [
+								":cgv_id"
+							],
+							"variable": [
+								{
+									"key": "cgv_id",
+									"value": "3bfe5c69-6d2d-46bc-a435-b690bb434326"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Commercial Condition",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}commercial_condition",
+							"host": [
+								"{{api_url}}commercial_condition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}commercial_condition/:cc_id",
+							"host": [
+								"{{api_url}}commercial_condition"
+							],
+							"path": [
+								":cc_id"
+							],
+							"variable": [
+								{
+									"key": "cc_id",
+									"value": "c0888afc-05c3-4096-9946-d276e6b7d1fd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}commercial_condition/:cc_id/file",
+							"host": [
+								"{{api_url}}commercial_condition"
+							],
+							"path": [
+								":cc_id",
+								"file"
+							],
+							"variable": [
+								{
+									"key": "cc_id",
+									"value": "c0888afc-05c3-4096-9946-d276e6b7d1fd"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Message",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}commercial_condition",
+							"host": [
+								"{{api_url}}commercial_condition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get last",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}message/last/:limit",
+							"host": [
+								"{{api_url}}message"
+							],
+							"path": [
+								"last",
+								":limit"
+							],
+							"variable": [
+								{
+									"key": "limit",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Application",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}application",
+							"host": [
+								"{{api_url}}application"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Statistic",
+			"item": [
+				{
+					"name": "Get last",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}statistic/last/",
+							"host": [
+								"{{api_url}}statistic"
+							],
+							"path": [
+								"last",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the month",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}statistic/:year/:month",
+							"host": [
+								"{{api_url}}statistic"
+							],
+							"path": [
+								":year",
+								":month"
+							],
+							"variable": [
+								{
+									"key": "year",
+									"value": "2021"
+								},
+								{
+									"key": "month",
+									"value": "01"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ShippingSlip",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}shipping_slip",
+							"host": [
+								"{{api_url}}shipping_slip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}shipping_slip/:shipping_slip",
+							"host": [
+								"{{api_url}}shipping_slip"
+							],
+							"path": [
+								":shipping_slip"
+							],
+							"variable": [
+								{
+									"key": "shipping_slip",
+									"value": "d6e69b9e-07be-4855-8757-87efdfae7cdc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}shipping_slip/:shipping_slip/file",
+							"host": [
+								"{{api_url}}shipping_slip"
+							],
+							"path": [
+								":shipping_slip",
+								"file"
+							],
+							"variable": [
+								{
+									"key": "shipping_slip",
+									"value": "d6e69b9e-07be-4855-8757-87efdfae7cdc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ShippingTracking",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}shipping_tracking",
+							"host": [
+								"{{api_url}}shipping_tracking"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shipping",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}shipping",
+							"host": [
+								"{{api_url}}shipping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}shipping/:shipping_id",
+							"host": [
+								"{{api_url}}shipping"
+							],
+							"path": [
+								":shipping_id"
+							],
+							"variable": [
+								{
+									"key": "shipping_id",
+									"value": "28bb1393-29ed-4f04-aa5d-cedc6807863f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}shipping/:shipping_id/file",
+							"host": [
+								"{{api_url}}shipping"
+							],
+							"path": [
+								":shipping_id",
+								"file"
+							],
+							"variable": [
+								{
+									"key": "shipping_id",
+									"value": "28bb1393-29ed-4f04-aa5d-cedc6807863f"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}order",
+							"host": [
+								"{{api_url}}order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}order/:order_id",
+							"host": [
+								"{{api_url}}order"
+							],
+							"path": [
+								":order_id"
+							],
+							"variable": [
+								{
+									"key": "order_id",
+									"value": "a6518df8-36aa-4e0c-9c87-fc24d25c6d2c"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "Notification all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"url": {
+							"raw": "{{api_url}}notification",
+							"host": [
+								"{{api_url}}notification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notification edit one",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "read",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}notification/:notification_id",
+							"host": [
+								"{{api_url}}notification"
+							],
+							"path": [
+								":notification_id"
+							],
+							"variable": [
+								{
+									"key": "notification_id",
+									"value": "723917"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark all as read",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "AUTHORIZATION",
+								"value": "{{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "read",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{api_url}}notification/mark_all_as_read",
+							"host": [
+								"{{api_url}}notification"
+							],
+							"path": [
+								"mark_all_as_read"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Content all",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{api_key}}",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{api_url}}content",
+					"host": [
+						"{{api_url}}content"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Log one",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "AUTHORIZATION",
+						"value": "{{api_key}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "slug",
+							"value": "homepage",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{api_url}}log",
+					"host": [
+						"{{api_url}}log"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,41 @@
+version: '2'
+
+services:
+  production_mysql:
+    image: mysql/mysql-server
+    container_name: production_mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_DATABASE=guinot_extranet
+      - MYSQL_USER=guinot
+      - MYSQL_PASSWORD=VPtiVFWhAutJyha3
+    volumes:
+      - /home/guinot01/database/production:/var/lib/mysql
+    command : mysqld --sql_mode=""
+
+  production_phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: production_phpmyadmin
+    ports:
+      - 8001:80
+    links:
+      - production_mysql:db
+
+  production:
+    image: guinot-extranet
+    container_name: production
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /home/guinot01/www/extranet/production:/var/www/html
+      - /home/guinot01/eone/production:/home/docker/eone
+      - /home/guinot01/log/production/application:/home/docker/log
+      - /home/guinot01/log/production/apache:/var/log/apache2
+      - /home/guinot01/apache/production/sites-available:/etc/apache2/sites-available
+      - /home/guinot01/apache/production/sites-enabled:/etc/apache2/sites-enabled
+      - /etc/letsencrypt:/etc/letsencrypt
+    links:
+      - production_mysql

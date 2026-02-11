@@ -1,0 +1,1 @@
+<?= $this->element('admin_notif_mail/index') ?>

@@ -1,0 +1,204 @@
+// General
+// NOTE styles on tag selectors
+// ---------------------
+body {
+	background: $gray-lightest;
+}
+
+fieldset {
+	padding: 0;
+	border-radius: $border-radius;
+	border: 0;
+	background: $white;
+}
+
+
+
+// Bootstrap overrides and addons
+// ---------------------
+.material-icons {
+	position: relative;
+	top: 2px;
+}
+
+.btn {
+	cursor: pointer;
+}
+
+.btn i {
+	top: -2px;
+	line-height: 0;
+	font-size: 1.25em;
+	vertical-align: middle;
+}
+
+.btn-inverse {
+	background: $gray-dark;
+	color: $white;
+
+	&:hover, &:focus {
+		background: darken($gray-dark, 10%);
+	}
+}
+
+.input-xs {
+	max-width: 3rem;
+}
+
+.breadcrumb {
+	background: transparent;
+}
+
+.alert > :last-child { margin-bottom: 0; }
+
+.table {
+	&.table-bordered { background: $white; }
+	&-wrap { max-width: 100%; overflow-x: auto; }
+
+	&-check {
+		@extend %unselectable;
+		width: 3rem;
+		padding: 0 !important;
+		text-align: center;
+		font-size: 0;
+
+		.custom-checkbox {
+			margin: 0;
+			padding: 1rem;
+		}
+	}
+
+	&-actions {
+		@extend %unselectable;
+		white-space: nowrap;
+		text-align: center;
+
+		& > * {
+			margin: 0 .125rem;
+		}
+	}
+}
+
+.custom-control {
+	@extend %unselectable;
+	align-items: center;
+	justify-content: center;
+
+	&-input { display: none; }
+	&-indicator {
+		position: static;
+	}
+}
+
+.card-header {
+	font-size: $font-size-base;
+}
+
+.form-control-label {
+	font-weight: bold;
+}
+
+.form-control-feedback {
+	font-size: $font-size-sm;
+}
+
+.form-check-legend {
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.custom-control {
+	padding-left: 0;
+	margin: 0;
+	vertical-align: middle;
+}
+.custom-control-description {
+	margin-left: .5rem;
+}
+
+.FilterForm {
+	.form-label {
+		font-weight: bold;
+	}
+	.form-actions {
+		text-align: center;
+		& > * {
+			margin: 0 10px;
+		}
+	}
+}
+
+.FilterHeader {
+	background: $gray;
+	color: $white;
+	font-weight: bold;
+}
+
+.trumbowyg.trumbowyg-box {
+	min-height: 160px;
+	& > .trumbowyg-editor {
+		min-height: 160px;
+		p {
+			margin-bottom: 0;
+		}
+	}
+}
+
+a.btn {
+	&:active, &:hover {
+		color: $white;
+	}
+	&.btn-link:active, &.btn-link:hover {
+		color: #600024;
+	}
+}
+
+textarea {
+	min-height: 160px;
+}
+
+// Utilities
+// NOTE use `u-` prefix for public classes
+// ---------------------
+
+/* For inline form group */
+
+.form-group-inline {
+	display: inline-block;
+
+	.form-control {
+		display: inline-block;
+		width: auto;
+		margin: 0 25px 0 10px;
+		&.field-date {
+			width:7rem;
+		}
+	}
+}
+
+/* list variable on wyziwyg */
+ul.list-variable {
+	list-style: none;
+	padding-left: 0px;
+	font-size: 0.85em;
+
+	span.title-variable {
+		display: inline-block;
+		width: 200px;
+		font-weight: bold;
+	}
+}
+
+// special class for listing
+tr.soft-deleted-line {
+	color: $gray-light;
+	background: rgba(0, 0, 0, .075);
+}
+
+// style for contributors on edit page
+.wrap-contributor {
+	text-align: right;
+	& p {
+		margin-bottom: 0.5rem;
+	}
+}

@@ -1,0 +1,3 @@
+societe|client|montant|date_du_jour
+RG|50691|100003|20180523
+RG|50281|6698|20180523

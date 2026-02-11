@@ -1,0 +1,300 @@
+diff --git a/application/controllers/Authentication.php b/application/controllers/Authentication.php
+index 3c68223..26dc7f4 100755
+--- a/application/controllers/Authentication.php
++++ b/application/controllers/Authentication.php
+@@ -46,14 +46,9 @@ class Authentication extends \App\Core\Controller\Base
+                     'authentication_error_invalid_reset_account',
+                     function ($value) use ($validator) {
+                         if ($value !== '') {
+-                            if ($user = UserModel::where('username', $value)->where('active', '1')->first()) {
++                            if ($user = UserModel::where('username', $value)->first()) {
+                                 $validator->validation_data['userEntity'] = $user;
+-                                foreach ($user->customers as $customer) {
+-                                    if (!$customer->isClosed) {
+-                                        return true;
+-                                    }
+-                                }
+-                                return false;
++                                return true;
+                             }
+                             return false;
+                         }
+@@ -87,14 +82,9 @@ class Authentication extends \App\Core\Controller\Base
+                     'authentication_error_invalid_reset_account',
+                     function ($value) use ($validator) {
+                         if ($value !== '') {
+-                            if ($user = UserModel::where('username', $value)->where('active', '1')->first()) {
++                            if ($user = UserModel::where('username', $value)->first()) {
+                                 $validator->validation_data['userEntity'] = $user;
+-                                foreach ($user->customers as $customer) {
+-                                    if (!$customer->isClosed) {
+-                                        return true;
+-                                    }
+-                                }
+-                                return false;
++                                return true;
+                             }
+                             return false;
+                         }
+diff --git a/application/controllers/webservice/Authentication.php b/application/controllers/webservice/Authentication.php
+index 571ee1a..56ebd1a 100644
+--- a/application/controllers/webservice/Authentication.php
++++ b/application/controllers/webservice/Authentication.php
+@@ -32,14 +32,14 @@ class Authentication extends \App\Core\Controller\Webservice
+         $customers = new \App\Model\Customer();
+ 
+         // Either try to find a corresponding customer or a corresponding user
+-        if ($customer = $customers->where('id', $this->input->post('username'))->isNotClosed()->first()) {
++        if ($customer = $customers->where('id', $this->input->post('username'))->where('active', 1)->first()) {
+             $customer['company_name'] = $customer->company->name;
+             $customer['family_name'] = $customer->family->name->value;
+             $customer['support_name'] = $customer->support->name;
+             $customer['unread_notification_count'] = count($customer->notifications()->where('read', '0')->get());
+-            $user = $users->where('username', $customer->email)->where('active', 1)->first();
++            $user = $users->where('username', $customer->email)->first();
+         } else {
+-            $user = $users->where('username', $this->input->post('username'))->where('active', 1)->first();
++            $user = $users->where('username', $this->input->post('username'))->first();
+         }
+ 
+         // loads the setting
+@@ -97,7 +97,7 @@ class Authentication extends \App\Core\Controller\Webservice
+             ]);
+         } else {
+             // Check if there is at least one customer linked to this user
+-            $customer_list = $user->customers()->isNotClosed()->get();
++            $customer_list = $user->customers()->active()->get();
+             if (count($customer_list) === 0) {
+                 $this->return(static::HTTP_UNPROCESSABLE_ENTITY, [
+                     'resultCode' => 'LOGIN_ERROR'
+@@ -238,7 +238,7 @@ class Authentication extends \App\Core\Controller\Webservice
+         }
+ 
+         // Find a corresponding active customer
+-        if (!$customer = $customer_model->where('id', $this->input->post('customer_id'))->isNotClosed()->first()) {
++        if (!$customer = $customer_model->where('id', $this->input->post('customer_id'))->where('active', '1')->first()) {
+             $this->return(static::HTTP_NOT_FOUND, [
+                 'resultCode' => 'CUSTOMER_NOT_FOUND'
+             ]);
+@@ -254,7 +254,7 @@ class Authentication extends \App\Core\Controller\Webservice
+ 
+         // Add company and support names for each customers
+         $customers = [];
+-        foreach ($user->customers()->isNotClosed()->get() as $c) {
++        foreach ($user->customers()->active()->get() as $c) {
+             $c['company_name'] = $c->company->name;
+             $c['family_name'] = $c->family->name->value;
+             $c['support_name'] = null;
+@@ -336,22 +336,6 @@ class Authentication extends \App\Core\Controller\Webservice
+                 'resultCode' => 'UNKNOWN_USER'
+             ]);
+         }
+-        if (!empty($user->customers)) {
+-            $sendMail = false;
+-            foreach ($user->customers as $customer) {
+-                if (!$customer->isClosed) {
+-                    $sendMail = true;
+-                }
+-            }
+-        } else {
+-            $sendMail = true;
+-        }
+-
+-        if (!$sendMail || $user->active == 0) {
+-            $this->return(static::HTTP_NOT_FOUND, [
+-                'resultCode' => 'ACCOUNT_CLOSED'
+-            ]);
+-        }
+ 
+         // Set a password reset token
+         $password_reset_token = bin2hex(random_bytes(20));
+diff --git a/application/jobs/ImportCustomers.php b/application/jobs/ImportCustomers.php
+index 14707d8..7dca85e 100644
+--- a/application/jobs/ImportCustomers.php
++++ b/application/jobs/ImportCustomers.php
+@@ -13,7 +13,7 @@ use \App\Model\UsersRoles as UsersRolesModel;
+ 
+ class ImportCustomers extends \App\Job\Import
+ {
+-    protected $source_file_pattern = '/\/client_([0-9]{8})\.txt$/';
++    protected $source_file_pattern = '/client_([0-9]{8})\.txt$/';
+     protected $model = '\App\Model\Customer';
+ 
+     protected $map = [
+@@ -103,11 +103,8 @@ class ImportCustomers extends \App\Job\Import
+                 }, $oldDelegations);
+             }
+ 
+-            UserModel::where('id', $currentUser->id)->update([
+-                'active' => 0,
+-                'deleted_at' => \Carbon\Carbon::now(),
+-            ]);
+-            UsersRolesModel::where('user_id', $currentUser->id)->delete();
++            UserModel::where('id', $currentUser->user_id)->update(['deleted_at' => \Carbon\Carbon::now()]);
++            UsersRolesModel::where('user_id', $currentUser->user_id)->delete();
+         }
+     }
+ 
+diff --git a/application/jobs/PaymentUpdate.php b/application/jobs/PaymentUpdate.php
+index f1479d8..0d89c85 100644
+--- a/application/jobs/PaymentUpdate.php
++++ b/application/jobs/PaymentUpdate.php
+@@ -75,39 +75,37 @@ class PaymentUpdate extends \Globalis\PuppetSkilled\Queue\Queueable
+         app()->load->language('webservice/payment');
+ 
+         $customer = $payment->customer;
+-        if (!$customer->isClosed && !$customer->isRestricted) {
+-            $email = new MailerContent();
++        $email = new MailerContent();
+ 
+-            if ($payment->state === 'succeeded') {
+-                $email->to($customer->email)
+-                ->setContent(
+-                    'email_payment_success',
+-                    [
+-                        'user_first_name' => ucfirst(strtolower($customer->first_name)),
+-                        'user_last_name'  => ucfirst(strtolower($customer->last_name)),
+-                        'user_email'      => $customer->email,
+-                        'amount'          => number_format($payment->amount, 2, ',', ' '),
+-                        'date'            => user_date_format($payment->created_at, false),
+-                        'reason'          => html_escape(html_escape(substr(strstr($payment->description, ' - '), 3))),
+-                        'front_url'       => config_item('front_base_url')
+-                    ]
+-                );
+-            } else {
+-                $email->to($customer->email)
+-                ->setContent(
+-                    'email_payment_failed',
+-                    [
+-                        'user_first_name' => ucfirst(strtolower($customer->first_name)),
+-                        'user_last_name'  => ucfirst(strtolower($customer->last_name)),
+-                        'user_email'      => $customer->email,
+-                        'payment_status'  => lang('payment_stripe_label_' . $payment->state),
+-                        'amount'          => number_format($payment->amount, 2, ',', ' '),
+-                        'date'            => user_date_format($payment->created_at, false),
+-                        'reason'          => html_escape(html_escape(substr(strstr($payment->description, ' - '), 3))),
+-                        'front_url'       => config_item('front_base_url')
+-                    ]
+-                );
+-            }
++        if ($payment->state === 'succeeded') {
++            $email->to($customer->email)
++            ->setContent(
++                'email_payment_success',
++                [
++                    'user_first_name' => ucfirst(strtolower($customer->first_name)),
++                    'user_last_name'  => ucfirst(strtolower($customer->last_name)),
++                    'user_email'      => $customer->email,
++                    'amount'          => number_format($payment->amount, 2, ',', ' '),
++                    'date'            => user_date_format($payment->created_at, false),
++                    'reason'          => html_escape(html_escape(substr(strstr($payment->description, ' - '), 3))),
++                    'front_url'       => config_item('front_base_url')
++                ]
++            );
++        } else {
++            $email->to($customer->email)
++            ->setContent(
++                'email_payment_failed',
++                [
++                    'user_first_name' => ucfirst(strtolower($customer->first_name)),
++                    'user_last_name'  => ucfirst(strtolower($customer->last_name)),
++                    'user_email'      => $customer->email,
++                    'payment_status'  => lang('payment_stripe_label_' . $payment->state),
++                    'amount'          => number_format($payment->amount, 2, ',', ' '),
++                    'date'            => user_date_format($payment->created_at, false),
++                    'reason'          => html_escape(html_escape(substr(strstr($payment->description, ' - '), 3))),
++                    'front_url'       => config_item('front_base_url')
++                ]
++            );
+         }
+ 
+         $email->handle();
+diff --git a/application/language/french/backoffice/customer_lang.php b/application/language/french/backoffice/customer_lang.php
+index 8d90281..cd6cc7d 100644
+--- a/application/language/french/backoffice/customer_lang.php
++++ b/application/language/french/backoffice/customer_lang.php
+@@ -22,7 +22,6 @@ $lang['customer_label_last_name'] = 'Nom';
+ $lang['customer_label_title'] = 'Raison sociale';
+ $lang['customer_label_enable'] = 'Actif';
+ $lang['customer_label_created_at'] = 'Date d\'import';
+-$lang['customer_label_closing_date'] = 'Date de fermeture';
+ $lang['customer_label_address'] = 'Adresse';
+ $lang['customer_label_info_user'] = 'Informations personnelles';
+ $lang['customer_label_info_customer'] = 'Informations client';
+diff --git a/application/models/Customer.php b/application/models/Customer.php
+index 7dcc82e..c2daff0 100644
+--- a/application/models/Customer.php
++++ b/application/models/Customer.php
+@@ -257,11 +257,11 @@ class Customer extends Model
+ 
+     public function getIsClosedAttribute()
+     {
+-        return (!empty($this->closing_date) && Carbon::now()->gte($this->closing_date)) || $this->active === 0;
++        return Carbon::now()->gte($this->closing_date) || $this->active === 0;
+     }
+ 
+     public function getIsRestrictedAttribute()
+     {
+-        return (!empty($this->closing_date) && Carbon::now()->gte($this->restrict_access_date));
++        return Carbon::now()->gte($this->restrict_access_date);
+     }
+ }
+\ No newline at end of file
+diff --git a/application/services/Secure/Authentication.php b/application/services/Secure/Authentication.php
+index 84e82c0..5cdfccf 100644
+--- a/application/services/Secure/Authentication.php
++++ b/application/services/Secure/Authentication.php
+@@ -68,19 +68,7 @@ class Authentication extends \Globalis\PuppetSkilled\Auth\Authentication
+                         $allowed_login_tries = (int) app()->settings->get('authentication.allowed_login_tries');
+ 
+                         $userModel = $this->newUserTable();
+-                        $user = $userModel->where('username', $value)->where('active', 1)->first();
+-
+-                        if (!empty($user->customers)) {
+-                            $lock = true;
+-                            foreach ($user->customers as $customer) {
+-                                if (!$customer->isClosed) {
+-                                    $lock = false;
+-                                }
+-                            }
+-                            if ($lock) {
+-                                return false;
+-                            }
+-                        }
++                        $user = $userModel->where('username', $value)->first();
+ 
+                         // if the account has been blocked
+                         if ($user && (int) $user->login_tries >= $allowed_login_tries) {
+diff --git a/application/views/Template/backoffice/customer/edit.php b/application/views/Template/backoffice/customer/edit.php
+index d9a5ff4..3c0bdaf 100644
+--- a/application/views/Template/backoffice/customer/edit.php
++++ b/application/views/Template/backoffice/customer/edit.php
+@@ -86,15 +86,6 @@ $item = $this->fetch('item');
+                 'default_value' => user_date_format($item->created_at, true),
+             ]
+         ) ?>
+-
+-        <?= $this->element(
+-            'form/block_input',
+-            [
+-                'input_element' => 'form/info',
+-                'label' => 'lang:customer_label_closing_date',
+-                'default_value' => $item->closing_date ? user_date_format($item->closing_date, true) : null,
+-            ]
+-        ) ?>
+         </div>
+         </fieldset>
+         <fieldset class="card mb-4">
+diff --git a/migrations/20251031153942_delivery_package.php b/migrations/20251031153942_delivery_package.php
+index 36c887f..971240b 100644
+--- a/migrations/20251031153942_delivery_package.php
++++ b/migrations/20251031153942_delivery_package.php
+@@ -182,7 +182,7 @@ class DeliveryPackage extends PuppetSkilledMigration
+                         'content_slug' => 'email_your_parcel_on_way',
+                         'local' => 'french',
+                         'title' => '[Portail Client Guinot - Mary Cohr] Votre colis est en route.',
+-                        'content' => "Bonjour {{user_first_name}},\r\n\r\nVotre colis \"{{numero_livraison}}\" a été expédié via le transporteur {{transporteur}}. Vous pouvez suivre son acheminement en cliquant sur le lien suivant :<a href='{{transporteur_url}}'>{{numero_livraison}}</a>.\r\n\r\nUne fois votre commande reçue, vous pourrez pointer les différents articles dans votre espace client, sous la rubrique <a href='{{front_url}}/delivery_note'>Bon de livraisons</a>.\r\n\r\nPour vous connecter, cliquez sur le bouton ci-dessous :\r\n\r\n[Se connecter à l'application]({{front_url}})",
++                        'content' => "Bonjour {{user_first_name}},\r\n\r\nVotre colis \"{{numero_livraison}}\" a été expédié via le transporteur {{transporteur}}. Vous pouvez suivre son acheminement en cliquant sur le lien suivant :<a href='{{transporteur_url}}'>{{numero_livraison}}</a>.\r\n\r\nUne fois votre commande reçue, vous pourrez pointer les différents articles dans votre espace client, sous la rubrique <a href='{{front_url}}/delivery_note'>Bon de livraison</a>.\r\n\r\nPour vous connecter, cliquez sur le bouton ci-dessous :\r\n\r\n[Se connecter à l'application]({{front_url}})",
+                     ])
+                     ->saveData();
+             } catch (\Exception $e) {
