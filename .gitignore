@@ -87,3 +87,5 @@ tests/*.suite.yml
 tests/_support/_generated/
 tests/_data/scenarios/
 tests/_emails/*
+
+writable/

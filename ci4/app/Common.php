@@ -13,3 +13,14 @@
  *
  * @see: https://codeigniter.com/user_guide/extending/common.html
  */
+
+if (is_file(ROOTPATH . '../vendor/autoload.php')) {
+    require_once ROOTPATH . '../vendor/autoload.php';
+}
+
+// Force-load local PuppetSkilled bridge after Composer deps are available.
+$pskAutoloader = APPPATH . 'Libraries/PuppetSkilledLocalAutoloader.php';
+if (is_file($pskAutoloader)) {
+    require_once $pskAutoloader;
+    \App\Libraries\PuppetSkilledLocalAutoloader::register();
+}

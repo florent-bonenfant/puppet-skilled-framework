@@ -13,6 +13,7 @@
         "php": "^8.2",
         "ext-intl": "*",
         "ext-mbstring": "*",
+        "globalis/puppet-skilled-framework": "dev-ci4-bridge",
         "laminas/laminas-escaper": "^2.18",
         "psr/log": "^3.0"
     },
@@ -52,7 +53,13 @@
     },
     "autoload": {
         "psr-4": {
-            "CodeIgniter\\": "system/"
+            "CodeIgniter\\": "system/",
+            "App\\Core\\": "../application/core",
+            "App\\Model\\": "../application/models",
+            "App\\Library\\": "../application/libraries",
+            "App\\View\\Cell\\": "../application/views/Cell",
+            "App\\Service\\": "../application/services",
+            "App\\Job\\": "../application/jobs"
         },
         "exclude-from-classmap": [
             "**/Database/Migrations/**"
@@ -61,8 +68,20 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "8.4.0"
+        }
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../libs/puppet-skilled-framework-ci4",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
     "scripts": {
         "test": "phpunit"
     }
