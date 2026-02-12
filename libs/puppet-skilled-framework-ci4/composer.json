@@ -1,0 +1,27 @@
+{
+    "description": "Puppet Skilled framework",
+    "name": "globalis/puppet-skilled-framework",
+    "type": "library",
+    "homepage": "https://globalis-ms.com",
+    "version": "dev-ci4-bridge",
+    "require": {
+        "php": "^8.2 || ^8.3 || ^8.4",
+        "codeigniter4/framework": "^4.6",
+        "pimple/pimple": "^3.0",
+        "nesbot/carbon": "^2.66",
+        "illuminate/database": "^8.83",
+        "illuminate/events": "^8.83"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.0",
+        "phpunit/phpunit": "^9.6"
+    },
+    "autoload": {
+        "files": [
+            "src/Core/helpers.php"
+        ],
+       "psr-4": {
+           "Globalis\\PuppetSkilled\\": "src"
+       }
+    }
+}
