@@ -28,7 +28,14 @@ class Delegate_user extends \App\Core\Controller\Webservice
     public function all()
     {
         $this->lang->load('webservice/module_lang.php', 'french');
-        $children = UsersDelegates::where('parent_user_id', $this->session->userdata['authentication.user'])
+        $parentUserId = $this->getAuthenticatedUserId();
+        if (!$parentUserId) {
+            $this->return(static::HTTP_FORBIDDEN, [
+                'resultCode' => 'NOT_LOGGED',
+            ]);
+        }
+
+        $children = UsersDelegates::where('parent_user_id', $parentUserId)
             ->where('customer_id', $this->customer->id)
             ->get();
         $result = [];
@@ -281,7 +288,7 @@ class Delegate_user extends \App\Core\Controller\Webservice
                 // set parent
                 $delegate = new UsersDelegates();
                 $delegate->user_id = $user->id;
-                $delegate->parent_user_id = $this->session->userdata['authentication.user'];
+                $delegate->parent_user_id = $this->getAuthenticatedUserId();
                 $delegate->customer_id = $this->customer->id;
                 $delegate->save();
 
@@ -521,5 +528,23 @@ class Delegate_user extends \App\Core\Controller\Webservice
         }
 
         return $permissions;
+    }
+
+    private function getAuthenticatedUserId()
+    {
+        $userId = null;
+
+        if (is_object($this->session) && method_exists($this->session, 'userdata')) {
+            $userId = $this->session->userdata('authentication.user');
+        } elseif (is_object($this->session) && isset($this->session->userdata) && is_array($this->session->userdata)) {
+            $userId = $this->session->userdata['authentication.user'] ?? null;
+        }
+
+        if ($userId) {
+            return $userId;
+        }
+
+        $user = $this->authenticationService ? $this->authenticationService->user() : null;
+        return $user->id ?? null;
     }
 }
