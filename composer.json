@@ -12,8 +12,44 @@
     },
     "repositories": [
         {
-            "type": "vcs",
-            "url": "git@github.com:florent-bonenfant/robo_task.git"
+            "type": "path",
+            "url": "libs/robo-task",
+            "options": {
+                "symlink": true,
+                "versions": {
+                    "globalis/robo-task": "2.3.1"
+                }
+            }
+        },
+        {
+            "type": "path",
+            "url": "libs/consolidation-config",
+            "options": {
+                "symlink": true,
+                "versions": {
+                    "consolidation/config": "2.1.2"
+                }
+            }
+        },
+        {
+            "type": "path",
+            "url": "libs/consolidation-robo",
+            "options": {
+                "symlink": false,
+                "versions": {
+                    "consolidation/robo": "3.0.12"
+                }
+            }
+        },
+        {
+            "type": "path",
+            "url": "libs/illuminate-support",
+            "options": {
+                "symlink": true,
+                "versions": {
+                    "illuminate/support": "8.83.27"
+                }
+            }
         },
         {
             "type": "vcs",
@@ -35,7 +71,7 @@
         "robmorgan/phinx": "0.12",
         "fakerphp/faker": "^1.21",
         "squizlabs/php_codesniffer": "*",
-        "globalis/robo-task": "^2.0",
+        "globalis/robo-task": "^2.3.1",
         "globalis/hideme": "dev-develop"
     },
     "autoload": {

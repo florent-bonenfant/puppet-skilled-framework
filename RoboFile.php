@@ -8,25 +8,36 @@ use Symfony\Component\Process\Process;
 
 class RoboFile extends \Globalis\Robo\Tasks
 {
+    /**
+     * Variables de configuration chargées par Robo.
+     * @var array<string,mixed>
+     */
+    private array $configVariables = [];
+
+    /**
+     * Propriétés de configuration depuis properties.php.
+     * @var array<string,mixed>
+     */
+    private array $properties = [];
 
     /**
      * Répertoire contenant les variables de configuration
      * @var string
      */
-    private $configDirectory = __DIR__ . '/.robo/config/';
+    private string $configDirectory = __DIR__ . '/.robo/config/';
 
     /**
      * Répertoire contenant les fichiers de configuration de l'application
      * @var string
      */
-    private $buildDirectory = __DIR__ . '/.robo/build';
+    private string $buildDirectory = __DIR__ . '/.robo/build';
 
     /**
      * @var string
      */
-    private $partsDirectory = __DIR__ . '/.robo/parts';
+    private string $partsDirectory = __DIR__ . '/.robo/parts';
 
-    private $eloquentConfig;
+    private ?Database $eloquentConfig = null;
 
     /**
      * Install project
@@ -575,7 +586,7 @@ class RoboFile extends \Globalis\Robo\Tasks
             $localhost,
             $remotePort
         );
-        $process = new Process($cmd);
+        $process = Process::fromShellCommandline($cmd);
         $process->setTimeout(60);
         $process->start();
         // Solution crade. Mais ssh n'est pas très verbeux
@@ -618,7 +629,7 @@ class RoboFile extends \Globalis\Robo\Tasks
      *
      * @return    void
      */
-    public function anonymize(string $model = null)
+    public function anonymize(?string $model = null)
     {
         $pathModels = $this->getPathModels();
         $this->output()->getFormatter()->setStyle('green', new \Symfony\Component\Console\Formatter\OutputFormatterStyle('green'));
