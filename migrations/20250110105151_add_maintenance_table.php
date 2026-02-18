@@ -1,8 +1,5 @@
 <?php
 
-
-use PuppetSkilledMigration;
-
 class AddMaintenanceTable extends PuppetSkilledMigration
 {
     protected $permissions = [
