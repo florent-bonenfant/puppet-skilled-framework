@@ -103,5 +103,5 @@ ServerSignature Off
 <IfModule mod_headers.c>
   Header set Access-Control-Allow-Origin "*"
   Header set Access-Control-Allow-Methods "POST, GET, DELETE, PUT, OPTIONS"
-  Header set Content-Security-Policy "default-src 'self'; frame-src 'self'; connect-src 'self' <##WEB_HOST##> <##FRONT_WEB_HOST##>; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self' 'unsafe-inline'; form-action 'self'; manifest-src 'self'"
+  Header set Content-Security-Policy "default-src 'self'; frame-src 'self' www.google.com; connect-src 'self' <##WEB_HOST##> <##FRONT_WEB_HOST##>; img-src 'self' fonts.googleapis.com data:; style-src 'self' 'unsafe-inline'; font-src 'self' fonts.gstatic.com; script-src 'self' 'unsafe-inline'; form-action 'self'; manifest-src 'self'"
 </IfModule>
