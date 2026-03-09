@@ -42,6 +42,7 @@ class ConfigProxy
         $this->load('config');
         $this->load('site_settings', true);
         $this->load('email', true);
+        $this->logMissingRequiredKeys();
     }
 
     public function load(string $file, bool $useSections = false): bool
@@ -139,6 +140,10 @@ class ConfigProxy
 
     private function logUnknownKey(string $key): void
     {
+        if (!$this->isDebugMode()) {
+            return;
+        }
+
         if ($this->isFalseyEnv('bridge.log_unknown_keys', true)) {
             return;
         }
@@ -149,8 +154,144 @@ class ConfigProxy
 
         $this->loggedUnknownKeys[$key] = true;
         if (function_exists('log_message')) {
-            log_message('warning', '[LegacyConfig] unknown key requested: {key}', ['key' => $key]);
+            log_message('debug', '[LegacyConfig] unknown key requested: {key}', ['key' => $key]);
         }
+    }
+
+    private function logMissingRequiredKeys(): void
+    {
+        if ($this->isFalseyEnv('bridge.log_required_missing', true)) {
+            return;
+        }
+
+        $required = $this->requiredKeys();
+        if ($required === []) {
+            return;
+        }
+
+        $missing = [];
+        foreach ($required as $key) {
+            if (!$this->isKnownKey($key)) {
+                $missing[] = $key;
+            }
+        }
+
+        if ($missing === [] || !function_exists('log_message')) {
+            return;
+        }
+
+        log_message(
+            'warning',
+            '[LegacyConfig] required key(s) not mapped: {keys}',
+            ['keys' => implode(', ', $missing)]
+        );
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function requiredKeys(): array
+    {
+        $raw = env('bridge.required_keys', '');
+        if (!is_string($raw) || trim($raw) === '') {
+            return [];
+        }
+
+        return array_values(array_filter(array_map('trim', explode(',', $raw)), static fn ($value) => $value !== ''));
+    }
+
+    private function isKnownKey(string $key): bool
+    {
+        if ($this->hasLegacyKey($key)) {
+            return true;
+        }
+
+        if (array_key_exists($key, $this->items)) {
+            return true;
+        }
+
+        if ($this->hasEnvCandidate($key)) {
+            return true;
+        }
+
+        return $this->isCi4MappedKey($key);
+    }
+
+    private function hasLegacyKey(string $key): bool
+    {
+        if (!function_exists('config') || !class_exists(LegacyConfig::class)) {
+            return false;
+        }
+
+        /** @var LegacyConfig $legacy */
+        $legacy = config(LegacyConfig::class);
+        return method_exists($legacy, 'hasItem') && $legacy->hasItem($key);
+    }
+
+    private function hasEnvCandidate(string $key): bool
+    {
+        $candidates = array_unique([
+            $key,
+            str_replace('.', '_', $key),
+            strtoupper($key),
+            strtoupper(str_replace('.', '_', $key)),
+        ]);
+
+        foreach ($candidates as $candidate) {
+            if (getenv($candidate) !== false || isset($_ENV[$candidate])) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function isCi4MappedKey(string $key): bool
+    {
+        if ($key === 'base_url' || $key === 'charset' || $key === 'csrf_protection') {
+            return true;
+        }
+
+        if (str_starts_with($key, 'cookie_')) {
+            return in_array($key, ['cookie_domain', 'cookie_path', 'cookie_secure'], true);
+        }
+
+        if (str_starts_with($key, 'sess_')) {
+            return in_array(
+                $key,
+                [
+                    'sess_cookie_name',
+                    'sess_expiration',
+                    'sess_save_path',
+                    'sess_match_ip',
+                    'sess_time_to_update',
+                    'sess_regenerate_destroy',
+                ],
+                true
+            );
+        }
+
+        return false;
+    }
+
+    private function isDebugMode(): bool
+    {
+        $override = env('bridge.debug');
+        if (is_bool($override)) {
+            return $override;
+        }
+        if (is_string($override) && trim($override) !== '') {
+            $normalized = strtolower(trim($override));
+            if (in_array($normalized, ['1', 'true', 'on', 'yes'], true)) {
+                return true;
+            }
+            if (in_array($normalized, ['0', 'false', 'off', 'no'], true)) {
+                return false;
+            }
+        }
+
+        $environment = env('CI_ENVIRONMENT', 'production');
+        return is_string($environment) && strtolower(trim($environment)) !== 'production';
     }
 
     private function isFalseyEnv(string $key, bool $default): bool
