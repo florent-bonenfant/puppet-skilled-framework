@@ -115,9 +115,11 @@ abstract class Base
             if (!isset($csp['script-src'])) {
                 $csp['script-src'] = ['self'];
             }
-            $asset = Asset::getInstance();
-            foreach ($asset->getScriptNonces() as $nonce) {
-                $csp['script-src'][] = "'nonce-".$nonce."'";
+            if (ENVIRONMENT !== 'development') {
+                $asset = Asset::getInstance();
+                foreach ($asset->getScriptNonces() as $nonce) {
+                    $csp['script-src'][] = "'nonce-".$nonce."'";
+                }
             }
             $string = '';
             foreach ($csp as $key => $values) {

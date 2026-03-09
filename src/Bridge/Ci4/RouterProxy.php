@@ -2,7 +2,7 @@
 
 namespace Globalis\PuppetSkilled\Bridge\Ci4;
 
-use CodeIgniter\HTTP\IncomingRequest;
+use CodeIgniter\HTTP\RequestInterface;
 
 class RouterProxy
 {
@@ -11,9 +11,9 @@ class RouterProxy
     public string $directory = '';
     public string $default_controller = 'home';
 
-    private IncomingRequest $request;
+    private RequestInterface $request;
 
-    public function __construct(IncomingRequest $request, $router = null)
+    public function __construct(RequestInterface $request, $router = null)
     {
         $this->request = $request;
 

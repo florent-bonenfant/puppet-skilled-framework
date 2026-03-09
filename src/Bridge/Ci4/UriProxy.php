@@ -2,7 +2,7 @@
 
 namespace Globalis\PuppetSkilled\Bridge\Ci4;
 
-use CodeIgniter\HTTP\IncomingRequest;
+use CodeIgniter\HTTP\RequestInterface;
 
 class UriProxy
 {
@@ -17,9 +17,9 @@ class UriProxy
     public array $rsegments = [];
     public string $uri_string = '';
 
-    private IncomingRequest $request;
+    private RequestInterface $request;
 
-    public function __construct(IncomingRequest $request)
+    public function __construct(RequestInterface $request)
     {
         $this->request = $request;
         $this->segments = $request->getUri()->getSegments();
