@@ -48,6 +48,9 @@ class OutputProxy
 
     public function _display(): void
     {
-        // CI4 sends output in the framework lifecycle; this keeps CI3 API compatibility.
+        // Legacy webservices call _display() and then exit immediately.
+        // In CI4 bridge mode we must send the response here, otherwise the body
+        // is never flushed.
+        $this->response->send();
     }
 }

@@ -69,6 +69,9 @@ abstract class Base
 
         $ci->config->load('autoload');
         $helpers = $ci->config->item('helper');
+        if (!is_array($helpers) || $helpers === []) {
+            $helpers = $ci->config->item('helpers');
+        }
 
         if (is_array($helpers) && $helpers !== []) {
             $ci->load->helper($helpers);

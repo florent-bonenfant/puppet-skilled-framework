@@ -33,7 +33,7 @@ trait Lockable
         return ($expiredAt instanceof Carbon && $expiredAt->gt(Carbon::now()) && $this->lock->user_id !== $user->getKey());
     }
 
-    public function acquireLock(Carbon $expired_at = null)
+    public function acquireLock(?Carbon $expired_at = null)
     {
         if (!$this->isLocked()) {
             $user = app()->authenticationService->user();

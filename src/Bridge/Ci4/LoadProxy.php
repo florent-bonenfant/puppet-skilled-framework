@@ -52,7 +52,16 @@ class LoadProxy
         if ($name === 'session' || $name === 'session/api_session' || $name === 'session/app_session') {
             $service = $this->bridge->session;
         } elseif ($name === 'email') {
-            $service = service('email');
+            $appEmailPath = defined('APPPATH') ? APPPATH . 'Libraries/APP_Email.php' : null;
+            if ($appEmailPath && is_file($appEmailPath)) {
+                require_once $appEmailPath;
+            }
+
+            if (class_exists('APP_Email')) {
+                $service = new \APP_Email(config('Email'));
+            } else {
+                $service = service('email');
+            }
         } elseif ($name === 'user_agent') {
             $service = new UserAgentProxy($this->bridge->request);
         }

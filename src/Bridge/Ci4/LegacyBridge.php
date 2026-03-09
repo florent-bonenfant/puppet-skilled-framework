@@ -2,6 +2,7 @@
 
 namespace Globalis\PuppetSkilled\Bridge\Ci4;
 
+#[\AllowDynamicProperties]
 class LegacyBridge
 {
     public LoadProxy $load;
@@ -15,6 +16,7 @@ class LegacyBridge
     public $request;
     public $response;
     public UriProxy $uri;
+    public $form_validation = null;
 
     /**
      * @var array<string,mixed>

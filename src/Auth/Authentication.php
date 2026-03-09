@@ -43,7 +43,7 @@ class Authentication extends \Globalis\PuppetSkilled\Service\Base
         return $this;
     }
 
-    public function login(array $data = null)
+    public function login(?array $data = null)
     {
         $validator = new FormValidation();
         $validator->set_rules(

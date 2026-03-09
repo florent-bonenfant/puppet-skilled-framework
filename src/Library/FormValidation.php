@@ -381,8 +381,15 @@ class FormValidation
 
     protected function resolveValidationMessage(string $rule, ?string $param = null): string
     {
-        $langKey = 'warning_' . $rule;
         if (function_exists('lang')) {
+            // First try direct language key (e.g. authentication_error_invalid_reset_account).
+            $translated = lang($rule);
+            if (is_string($translated) && $translated !== '' && $translated !== $rule) {
+                return $translated;
+            }
+
+            // Then try generic validation warning keys.
+            $langKey = 'warning_' . $rule;
             $translated = lang($langKey);
             if (is_string($translated) && $translated !== '' && $translated !== $langKey) {
                 return $translated;

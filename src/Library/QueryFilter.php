@@ -107,7 +107,9 @@ class QueryFilter
                         break;
                 }
             }
-            $defaults['params'] = array_intersect_key($this->application->input->{$defaults['method']}(), $defaults['filters']);
+            $defaults['params'] = $this->sanitizeParams(
+                array_intersect_key((array) $this->application->input->{$defaults['method']}(), $defaults['filters'])
+            );
         } elseif ($this->application->input->{$defaults['method']}($defaults['action']) === $defaults['reset_action']) {
             foreach ($defaults['filters'] as $params => $callback) {
                 switch ($defaults['method']) {
@@ -134,6 +136,45 @@ class QueryFilter
              $defaults['params'] = $defaults['default_filters'];
         }
         return $defaults;
+    }
+
+    /**
+     * Remove empty filter values while preserving meaningful scalar values (e.g. "0").
+     *
+     * @param array $params
+     * @return array
+     */
+    protected function sanitizeParams(array $params): array
+    {
+        foreach ($params as $key => $value) {
+            if (is_array($value)) {
+                $value = array_filter(
+                    $value,
+                    function ($item) {
+                        return !(is_string($item) && trim($item) === '');
+                    }
+                );
+
+                if (empty($value)) {
+                    unset($params[$key]);
+                    continue;
+                }
+
+                $params[$key] = $value;
+                continue;
+            }
+
+            if ($value === null) {
+                unset($params[$key]);
+                continue;
+            }
+
+            if (is_string($value) && trim($value) === '') {
+                unset($params[$key]);
+            }
+        }
+
+        return $params;
     }
 
     /**
