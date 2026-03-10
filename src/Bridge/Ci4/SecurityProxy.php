@@ -25,4 +25,26 @@ class SecurityProxy
     {
         // CI4 CSRF validation is filter-driven. Keep compatibility no-op.
     }
+
+    /**
+     * CI3 compatibility for Security::sanitize_filename().
+     */
+    public function sanitize_filename(string $str, bool $relativePath = false): string
+    {
+        $security = service('security');
+        if (method_exists($security, 'sanitizeFilename')) {
+            /** @phpstan-ignore-next-line */
+            return (string) $security->sanitizeFilename($str, $relativePath);
+        }
+
+        // Conservative fallback if security service API differs.
+        $cleaned = preg_replace('/[^A-Za-z0-9._\-\/\\\\]/', '', $str);
+        if (!is_string($cleaned)) {
+            return '';
+        }
+        if (!$relativePath) {
+            $cleaned = str_replace(['../', '..\\'], '', $cleaned);
+        }
+        return $cleaned;
+    }
 }

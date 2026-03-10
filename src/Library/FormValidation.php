@@ -268,18 +268,25 @@ class FormValidation
         }
 
         if (is_array($rule) && isset($rule[1]) && is_callable($rule[1])) {
-            $ok = (bool) call_user_func($rule[1], $metadata['postdata']);
+            $result = call_user_func($rule[1], $metadata['postdata']);
+            $ok = !($result === false || $result === null);
             if (!$ok) {
                 $message = is_string($rule[0] ?? null) ? $rule[0] : 'VALIDATION_ERROR';
                 $this->registerError($field, $metadata, $message);
+            } elseif ($result !== true) {
+                // CI3-compatible callback behavior: callbacks may return transformed value.
+                $metadata['postdata'] = $result;
             }
             return $ok;
         }
 
         if (is_callable($rule)) {
-            $ok = (bool) call_user_func($rule, $metadata['postdata']);
+            $result = call_user_func($rule, $metadata['postdata']);
+            $ok = !($result === false || $result === null);
             if (!$ok) {
                 $this->registerError($field, $metadata, 'VALIDATION_ERROR');
+            } elseif ($result !== true) {
+                $metadata['postdata'] = $result;
             }
             return $ok;
         }
