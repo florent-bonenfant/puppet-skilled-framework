@@ -62,7 +62,7 @@ class Service
                 );
             }
             return false;
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $this->reportExceptions($e);
         }
     }
@@ -98,7 +98,7 @@ class Service
                 (int) $options->maxTries
             );
             $job->fire();
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $this->handleJobException($job, $options, $e);
         }
     }
@@ -142,11 +142,25 @@ class Service
 
     protected function handleJobException($job, WorkerOptions $options, $e)
     {
+        if (function_exists('log_message')) {
+            log_message('error', '[Queue] Job exception: {message} in {file}:{line}', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+        }
         throw $e;
     }
 
     protected function reportExceptions($e)
     {
+        if (function_exists('log_message')) {
+            log_message('critical', '[Queue] Worker exception: {message} in {file}:{line}', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+            ]);
+        }
         throw $e;
     }
 }
