@@ -109,10 +109,16 @@ class LangProxy
             $language = 'french';
         }
 
+        $languageCandidates = $this->resolveLanguageCandidates($language);
+
         $relative = $key . '_lang.php';
-        $paths = [
-            defined('APPPATH') ? APPPATH . 'language/' . $language . '/' . $relative : null,
-        ];
+        $paths = [];
+        foreach ($languageCandidates as $candidate) {
+            if (defined('APPPATH')) {
+                $paths[] = APPPATH . 'Language/' . $candidate . '/' . $relative;
+                $paths[] = APPPATH . 'language/' . $candidate . '/' . $relative;
+            }
+        }
 
         foreach ($paths as $path) {
             if (!$path || !is_file($path)) {
@@ -135,6 +141,35 @@ class LangProxy
         }
 
         return false;
+    }
+
+    /**
+     * @return list<string>
+     */
+    private function resolveLanguageCandidates(string $language): array
+    {
+        $normalized = strtolower(trim($language));
+        if ($normalized === '') {
+            $normalized = 'french';
+        }
+
+        if ($normalized === 'en') {
+            return ['en', 'english'];
+        }
+
+        if ($normalized === 'english') {
+            return ['english', 'en'];
+        }
+
+        if ($normalized === 'fr') {
+            return ['fr', 'french'];
+        }
+
+        if ($normalized === 'french') {
+            return ['french', 'fr'];
+        }
+
+        return [$normalized];
     }
 
     private function autoloadKeyFamily(string $key): void
