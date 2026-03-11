@@ -16,6 +16,11 @@ class LangProxy
      */
     private array $lines = [];
 
+    /**
+     * @var array<string,bool>
+     */
+    private array $resolving = [];
+
     public function addSubdirectory(string $path): void
     {
         $this->subdirectory = trim($path, '/');
@@ -33,13 +38,20 @@ class LangProxy
             return $this->lines[$key];
         }
 
+        if (isset($this->resolving[$key])) {
+            return $key;
+        }
+
         if (function_exists('service')) {
             try {
+                $this->resolving[$key] = true;
                 $value = service('language')->getLine($key);
+                unset($this->resolving[$key]);
                 if (is_string($value) && $value !== $key) {
                     return $value;
                 }
             } catch (\Throwable $e) {
+                unset($this->resolving[$key]);
                 // Fallback below.
             }
         }
